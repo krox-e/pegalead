@@ -11,6 +11,14 @@ uv.zip
 .test_session/
 *.session
 
+# Other projects / experiments
+prisma-studio/
+
+# Temporary / test dumps
+*.png
+gmaps_api_resp.json
+sample_gmaps_blob.json
+
 # Python
 __pycache__/
 *.py[cod]
