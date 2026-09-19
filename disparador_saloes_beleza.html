@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel de Prospecção • Salões de Beleza & Estética</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d0e15;
+      --card-bg: rgba(23, 25, 38, 0.85);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --primary: #ec4899;
+      --primary-hover: #db2777;
+      --primary-glow: rgba(236, 72, 153, 0.3);
+      --whatsapp-green: #25d366;
+      --whatsapp-hover: #1ebd5b;
+      --whatsapp-glow: rgba(37, 211, 102, 0.25);
+      --accent: #a855f7;
+      --text: #f3f4f6;
+      --muted: #9ca3af;
+      --success: #10b981;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(236, 72, 153, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(168, 85, 247, 0.07) 0%, transparent 40%);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 2.5rem 1.5rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .badge-user {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(236, 72, 153, 0.12);
+      border: 1px solid rgba(236, 72, 153, 0.3);
+      color: #f472b6;
+      padding: 0.4rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      box-shadow: 0 0 15px rgba(236, 72, 153, 0.15);
+    }
+
+    h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffffff 0%, #fbcfe8 50%, #e9d5ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    p.subtitle {
+      color: var(--muted);
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 1.1rem;
+      padding: 1.35rem;
+      backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .stat-label {
+      font-size: 0.825rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+    }
+
+    .stat-value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .stat-value.pink { color: #f472b6; }
+    .stat-value.green { color: var(--whatsapp-green); }
+    .stat-value.purple { color: #c084fc; }
+
+    /* Safety Box */
+    .safety-box {
+      background: rgba(168, 85, 247, 0.08);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: 1.1rem;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .safety-box span.icon {
+      font-size: 2rem;
+    }
+
+    .safety-box h4 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      color: #c084fc;
+      margin-bottom: 0.25rem;
+    }
+
+    .safety-box p {
+      font-size: 0.925rem;
+      color: #e5e7eb;
+      line-height: 1.45;
+    }
+
+    /* Controls Bar */
+    .controls-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tabs {
+      display: flex;
+      background: rgba(15, 23, 42, 0.9);
+      padding: 0.4rem;
+      border-radius: 0.85rem;
+      border: 1px solid var(--card-border);
+      gap: 0.4rem;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      padding: 0.6rem 1.2rem;
+      border-radius: 0.6rem;
+      font-size: 0.925rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 0 12px var(--primary-glow);
+    }
+
+    .search-input {
+      background: rgba(23, 25, 38, 0.85);
+      border: 1px solid var(--card-border);
+      border-radius: 0.85rem;
+      padding: 0.6rem 1rem;
+      color: #fff;
+      font-size: 0.95rem;
+      outline: none;
+      min-width: 240px;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+    }
+
+    /* Leads List */
+    .leads-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .lead-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 1.2rem;
+      padding: 1.5rem;
+      backdrop-filter: blur(12px);
+      transition: all 0.2s ease;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .lead-card:hover {
+      border-color: rgba(236, 72, 153, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .lead-card.sent {
+      border-color: rgba(16, 185, 129, 0.35);
+      background: rgba(16, 185, 129, 0.06);
+    }
+
+    .lead-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .lead-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .lead-number {
+      font-size: 0.85rem;
+      font-weight: 800;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 0.25rem 0.65rem;
+      border-radius: 0.5rem;
+      color: var(--muted);
+    }
+
+    .lead-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .rating-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: rgba(255, 184, 77, 0.12);
+      color: #ffb84d;
+      padding: 0.25rem 0.6rem;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 700;
+    }
+
+    .lead-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .detail-item {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .detail-item strong {
+      color: #e5e7eb;
+    }
+
+    .msg-preview {
+      background: rgba(11, 15, 25, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 0.75rem;
+      padding: 0.85rem 1.1rem;
+      font-size: 0.875rem;
+      color: #e2e8f0;
+      line-height: 1.5;
+      margin-top: 0.35rem;
+      white-space: pre-line;
+      max-height: 130px;
+      overflow-y: auto;
+    }
+
+    /* Actions */
+    .lead-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      min-width: 200px;
+    }
+
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: var(--whatsapp-green);
+      color: #061e0e;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 0.85rem 1.35rem;
+      border-radius: 0.85rem;
+      text-decoration: none;
+      box-shadow: 0 4px 16px var(--whatsapp-glow);
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-whatsapp:hover {
+      background: var(--whatsapp-hover);
+      transform: scale(1.03);
+    }
+
+    .btn-copy {
+      background: rgba(236, 72, 153, 0.15);
+      color: #f472b6;
+      border: 1px solid rgba(236, 72, 153, 0.3);
+      padding: 0.55rem;
+      border-radius: 0.65rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+    }
+
+    .btn-copy:hover {
+      background: rgba(236, 72, 153, 0.25);
+      color: #fff;
+    }
+
+    .btn-mark {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--muted);
+      border: 1px solid var(--card-border);
+      padding: 0.55rem;
+      border-radius: 0.65rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-mark:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+    }
+
+    .btn-mark.active {
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--success);
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+
+    @media (max-width: 768px) {
+      .lead-card {
+        grid-template-columns: 1fr;
+      }
+      .lead-actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+      .btn-whatsapp, .btn-copy, .btn-mark {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="badge-user">✂️ Prospecção Ativa • Leonardo</div>
+      <h1>Painel de Leads para Salões de Beleza</h1>
+      <p class="subtitle">Contatos de salões e estúdios de beleza com WhatsApp direto verificado, sem site cadastrado e com alta reputação no Google Maps.</p>
+    </header>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-label">Meta Diária Segura</span>
+        <span class="stat-value pink" id="meta-count">25 - 30 Envios</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Mensagens Enviadas</span>
+        <span class="stat-value green" id="sent-count">0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Pendentes na Fila</span>
+        <span class="stat-value purple" id="pending-count">25</span>
+      </div>
+    </div>
+
+    <div class="safety-box">
+      <span class="icon">🛡️</span>
+      <div>
+        <h4>Cadência Recomendada (Proteção do seu WhatsApp)</h4>
+        <p>
+          Envie para <strong>25 a 30 contatos por dia</strong>, aguardando de <strong>30 a 60 segundos</strong> entre cada mensagem. O WhatsApp reconhece como envio 100% manual e orgânico!
+        </p>
+      </div>
+    </div>
+
+    <div class="controls-bar">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="setLimit(15)">🎯 Top 15 Mais Populares</button>
+        <button class="tab-btn" onclick="setLimit(30)">🔥 Top 30 Recomendados</button>
+        <button class="tab-btn" onclick="setLimit(50)">📋 Todos os 50</button>
+      </div>
+      <input type="text" class="search-input" id="search-input" placeholder="🔍 Filtrar por nome ou cidade..." oninput="renderLeads()">
+    </div>
+
+    <div class="leads-list" id="leads-container"></div>
+  </div>
+
+  <script>
+    const LEADS_DATA = [{"name": "Roberta Almeida Espaço da Beleza", "categories": "Salão de Beleza, Salão de sobrancelhas, Cabeleireiro, Centro de saúde e beleza, Manicure", "address": "Av. Mario Campolim, 230 - Parque Campolim, Sorocaba - SP, 18047-650", "bairro": "Parque Campolim", "city_state": "Sorocaba - SP", "whatsapp": "(15) 99635-2165", "wa_link": "https://wa.me/5515996352165", "rating": "4.9", "reviews": 1049, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJXXccJGKKxZQRpOK4h29mTwk", "place_id": "ChIJXXccJGKKxZQRpOK4h29mTwk", "instagram": "Não identificado / Sem site", "reviews_int": 1049, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5515996352165?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "GISELE CAPELLI EMBELEZAMENTO MELHORES DO ANO 2025", "categories": "Salão de Beleza, Esteticista, Studio de cílios, Massoterapeuta, Manicure, Perfumaria, Cabeleireiro, Loja de moda feminina", "address": "R. Javri, 449 A - Vila Assunção, Santo André - SP, 09181-510", "bairro": "Vila Assunção", "city_state": "Santo André - SP", "whatsapp": "(11) 96388-8404", "wa_link": "https://wa.me/5511963888404", "rating": "5.0", "reviews": 1022, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJhSAzXG1CzpQR8q323REZ_M4", "place_id": "ChIJhSAzXG1CzpQR8q323REZ_M4", "instagram": "Não identificado / Sem site", "reviews_int": 1022, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5511963888404?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Vilela Hair - Cachos", "categories": "Salão de Beleza, Cabeleireiro", "address": "R. Eng. Pedro Bax, 455 - Santa Amelia, Belo Horizonte - MG, 31560-380", "bairro": "Santa Amelia", "city_state": "Belo Horizonte - MG", "whatsapp": "(31) 97577-1464", "wa_link": "https://wa.me/5531975771464", "rating": "4.9", "reviews": 719, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJvbz9FTSRpgARIIvcQy10AO4", "place_id": "ChIJvbz9FTSRpgARIIvcQy10AO4", "instagram": "Não identificado / Sem site", "reviews_int": 719, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5531975771464?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Channel Studio da Beleza Sorocaba", "categories": "Salão de Beleza", "address": "R. Quinze de Novembro, 220 - Centro, Sorocaba - SP, 18010-081", "bairro": "Centro", "city_state": "Sorocaba - SP", "whatsapp": "(15) 99641-3826", "wa_link": "https://wa.me/5515996413826", "rating": "4.7", "reviews": 703, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJ54ZMRweLxZQRkvaZxTFu_qM", "place_id": "ChIJ54ZMRweLxZQRkvaZxTFu_qM", "instagram": "Não identificado / Sem site", "reviews_int": 703, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5515996413826?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Vieira Hair Salão de Beleza - Cabelereiro no Éden", "categories": "Salão de Beleza, Barbearia, Cabeleireiro", "address": "R. Salvador Leite Marques, 77 - Éden, Sorocaba - SP, 18103-050", "bairro": "Éden", "city_state": "Sorocaba - SP", "whatsapp": "(15) 98187-5332", "wa_link": "https://wa.me/5515981875332", "rating": "5.0", "reviews": 468, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJA-x9G0xfz5QR6NXi2NvIgEo", "place_id": "ChIJA-x9G0xfz5QR6NXi2NvIgEo", "instagram": "Não identificado / Sem site", "reviews_int": 468, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5515981875332?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Salão de Beleza Fortaleza | Kblos", "categories": "Salão de Beleza, Cabeleireiro", "address": "101, Av. Antônio Sales, 49 - Joaquim Távora, Fortaleza - CE, 60135-101", "bairro": "Joaquim Távora", "city_state": "Av. Antônio Sales, 49 - Joaquim Távora", "whatsapp": "(85) 98735-5060", "wa_link": "https://wa.me/5585987355060", "rating": "4.9", "reviews": 433, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJZavCPvxIxwcRlcvNmtcMcxU", "place_id": "ChIJZavCPvxIxwcRlcvNmtcMcxU", "instagram": "Não identificado / Sem site", "reviews_int": 433, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5585987355060?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Nah Pink Hair", "categories": "Salão de Beleza", "address": "Av. Hilário Pereira de Souza, 406 - Centro, Osasco - SP, 06010-170", "bairro": "Centro", "city_state": "Osasco - SP", "whatsapp": "(11) 97653-1779", "wa_link": "https://wa.me/5511976531779", "rating": "5.0", "reviews": 398, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJrRq4ftj5zpQRFTmXOJZNtaI", "place_id": "ChIJrRq4ftj5zpQRFTmXOJZNtaI", "instagram": "Não identificado / Sem site", "reviews_int": 398, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5511976531779?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Inovar Centro de Beleza", "categories": "Salão de Beleza, Manicure, Podólogo", "address": "R Dr Benjamim A Stauffer, 294 - Jardim Irajá, Ribeirão Preto - SP, 14020-350", "bairro": "Jardim Irajá", "city_state": "Ribeirão Preto - SP", "whatsapp": "(16) 99787-7577", "wa_link": "https://wa.me/5516997877577", "rating": "5.0", "reviews": 342, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJuYJbUyu_uZQRJTcmShlhFTc", "place_id": "ChIJuYJbUyu_uZQRJTcmShlhFTc", "instagram": "Não identificado / Sem site", "reviews_int": 342, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5516997877577?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Salão Cheia de Charme - BH - Unidade 2", "categories": "Salão de Beleza", "address": "Rua dos Tupinambás, 856 - Centro, Belo Horizonte - MG, 30120-074", "bairro": "Centro", "city_state": "Belo Horizonte - MG", "whatsapp": "(31) 99075-0655", "wa_link": "https://wa.me/5531990750655", "rating": "4.8", "reviews": 339, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJgeTelmaZpgARt1TY7uUeJDg", "place_id": "ChIJgeTelmaZpgARt1TY7uUeJDg", "instagram": "Não identificado / Sem site", "reviews_int": 339, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5531990750655?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Mésha Beauty Concept - Salão de Beleza - Sorocaba", "categories": "Salão de Beleza, Salão de sobrancelhas, Spa facial, Depilação, Cabeleireiro, Manicure, Podólogo, Terapeuta reiki", "address": "R. Aparecida, 1057 - Jardim Santa Rosália, Sorocaba - SP, 18095-000", "bairro": "Jardim Santa Rosália", "city_state": "Sorocaba - SP", "whatsapp": "(15) 98139-9679", "wa_link": "https://wa.me/5515981399679", "rating": "4.8", "reviews": 325, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJ0e2eP6qKxZQRZxIHo_h7bwU", "place_id": "ChIJ0e2eP6qKxZQRZxIHo_h7bwU", "instagram": "Não identificado / Sem site", "reviews_int": 325, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5515981399679?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Studio Luana Rodrigues", "categories": "Salão de Beleza", "address": "Rua Dr. Costa Aguiar, 205 - Centro - Centro, Campinas - SP, 13010-060", "bairro": "Centro", "city_state": "Campinas - SP", "whatsapp": "(19) 98173-0401", "wa_link": "https://wa.me/5519981730401", "rating": "4.9", "reviews": 312, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJ8_eEWfzPyJQRhR0DQ4Zf4t8", "place_id": "ChIJ8_eEWfzPyJQRhR0DQ4Zf4t8", "instagram": "Não identificado / Sem site", "reviews_int": 312, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5519981730401?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "12.B Salon", "categories": "Salão de Beleza", "address": "Galeria Caribe - R. Martinica, 400 - Lj 7 - Jardim America, Sorocaba - SP, 18046-805", "bairro": "Jardim America", "city_state": "Sorocaba - SP", "whatsapp": "(15) 99641-7162", "wa_link": "https://wa.me/5515996417162", "rating": "4.9", "reviews": 303, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJryxGL8mLxZQRskulIc8b0Bs", "place_id": "ChIJryxGL8mLxZQRskulIc8b0Bs", "instagram": "Não identificado / Sem site", "reviews_int": 303, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5515996417162?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Marcio Cabeleireiros", "categories": "Salão de Beleza", "address": "R. Vinte e Sete de Janeiro, 65 - Novo Osasco, Osasco - SP, 06045-000", "bairro": "Novo Osasco", "city_state": "Osasco - SP", "whatsapp": "(11) 99557-5040", "wa_link": "https://wa.me/5511995575040", "rating": "4.9", "reviews": 273, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJoz--bXxVzpQRnDmtU7LUKlU", "place_id": "ChIJoz--bXxVzpQRnDmtU7LUKlU", "instagram": "Não identificado / Sem site", "reviews_int": 273, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5511995575040?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Espaço Performance", "categories": "Salão de Beleza", "address": "R. das Dálias, 576 - Pituba, Salvador - BA, 41810-040", "bairro": "Pituba", "city_state": "Salvador - BA", "whatsapp": "(71) 99119-5269", "wa_link": "https://wa.me/5571991195269", "rating": "4.5", "reviews": 258, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJVQGh6RQbFgcR8OO71w_7bh8", "place_id": "ChIJVQGh6RQbFgcR8OO71w_7bh8", "instagram": "Não identificado / Sem site", "reviews_int": 258, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5571991195269?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Platino Cabeleireiros", "categories": "Salão de Beleza", "address": "Av. Wladimir Meirelles Ferreira, 1755 - Jardim Botânico, Ribeirão Preto - SP, 14021-630", "bairro": "Jardim Botânico", "city_state": "Ribeirão Preto - SP", "whatsapp": "(16) 99782-4495", "wa_link": "https://wa.me/5516997824495", "rating": "4.8", "reviews": 253, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJGwLRm82-uZQR4OJJ0s5G2YE", "place_id": "ChIJGwLRm82-uZQR4OJJ0s5G2YE", "instagram": "Não identificado / Sem site", "reviews_int": 253, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5516997824495?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Fashion Hair - Salão de Beleza - Niterói - RJ", "categories": "Salão de Beleza, Manicure, Cabeleireiro", "address": "Av. Ernani do Amaral Peixoto, 36 - Sl 817 - Centro, Niterói - RJ, 24020-074", "bairro": "Centro", "city_state": "Niterói - RJ", "whatsapp": "(21) 96663-9962", "wa_link": "https://wa.me/5521966639962", "rating": "5.0", "reviews": 253, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJLZJjbl2DmQARabRM01iINBo", "place_id": "ChIJLZJjbl2DmQARabRM01iINBo", "instagram": "Não identificado / Sem site", "reviews_int": 253, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5521966639962?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "A Sala Secreta", "categories": "Salão de Beleza", "address": "R. Santo André, 425 - Vila Assunção, Santo André - SP, 09020-230", "bairro": "Vila Assunção", "city_state": "Santo André - SP", "whatsapp": "(11) 95476-6877", "wa_link": "https://wa.me/5511954766877", "rating": "4.9", "reviews": 250, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJz-3LBO5DzpQRz3cjzgcumNA", "place_id": "ChIJz-3LBO5DzpQRz3cjzgcumNA", "instagram": "Não identificado / Sem site", "reviews_int": 250, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5511954766877?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Empório da Beleza", "categories": "Salão de Beleza, Manicure", "address": "Av. Araucária, 1044 - Parque Oratório, Santo André - SP, 09251-040", "bairro": "Parque Oratório", "city_state": "Santo André - SP", "whatsapp": "(11) 96745-8571", "wa_link": "https://wa.me/5511967458571", "rating": "4.9", "reviews": 247, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJFZPraBpozpQRKf212PeBzhw", "place_id": "ChIJFZPraBpozpQRKf212PeBzhw", "instagram": "Não identificado / Sem site", "reviews_int": 247, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5511967458571?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Studio Robson Motta", "categories": "Salão de Beleza", "address": "Av: Treze de maio, 47 - Sl 203 - Centro, Rio de Janeiro - RJ, 20031-007", "bairro": "Centro", "city_state": "Rio de Janeiro - RJ", "whatsapp": "(21) 98996-4612", "wa_link": "https://wa.me/5521989964612", "rating": "4.7", "reviews": 243, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJjYdBHmF_mQAR7snYirSByu4", "place_id": "ChIJjYdBHmF_mQAR7snYirSByu4", "instagram": "Não identificado / Sem site", "reviews_int": 243, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5521989964612?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Studio Y", "categories": "Salão de Beleza, Esteticista, Salão de sobrancelhas, Cabeleireiro, Lounge bar, Estúdio de maquiagem, Manicure", "address": "Alameda Ricardo Paranhos, 251 - St. Marista, Goiânia - GO, 74175-020", "bairro": "Setor Marista", "city_state": "Goiânia - GO", "whatsapp": "(62) 99421-0710", "wa_link": "https://wa.me/5562994210710", "rating": "4.6", "reviews": 238, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJAQCM1BnxXpMRZG7yc-Pt-aE", "place_id": "ChIJAQCM1BnxXpMRZG7yc-Pt-aE", "instagram": "Não identificado / Sem site", "reviews_int": 238, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5562994210710?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Studio Bella Trindade", "categories": "Salão de Beleza, Salão de sobrancelhas, Spa facial, Estúdio de maquiagem, Manicure, Cabeleireiro, Serviço de depilação a cera, Serviços para casamento, Loja de noivas", "address": "Av. da Abolição, 3450 - Meireles, Fortaleza - CE, 60165-082", "bairro": "Meireles", "city_state": "Fortaleza - CE", "whatsapp": "(85) 99232-0676", "wa_link": "https://wa.me/5585992320676", "rating": "4.9", "reviews": 235, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJ44cDd3tJxwcRnkdVCFU5Q-w", "place_id": "ChIJ44cDd3tJxwcRnkdVCFU5Q-w", "instagram": "Não identificado / Sem site", "reviews_int": 235, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5585992320676?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Espaço Charmy", "categories": "Salão de Beleza, Manicure", "address": "Edifício Marques - R. José Clemente, 21 - 101 - Centro, Niterói - RJ, 24020-102", "bairro": "Centro", "city_state": "R. José Clemente, 21 - 101 - Centro", "whatsapp": "(21) 99951-9250", "wa_link": "https://wa.me/5521999519250", "rating": "4.5", "reviews": 230, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJ7_Tq6MSDmQARi7-kqJY4pAU", "place_id": "ChIJ7_Tq6MSDmQARi7-kqJY4pAU", "instagram": "Não identificado / Sem site", "reviews_int": 230, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5521999519250?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Studio WL - Salão de Beleza", "categories": "Salão de Beleza, Manicure, Cabeleireiro", "address": "R. Pernambuco, 1408 - Funcionários, Belo Horizonte - MG, 30130-154", "bairro": "Funcionários", "city_state": "Belo Horizonte - MG", "whatsapp": "(31) 98412-9129", "wa_link": "https://wa.me/5531984129129", "rating": "4.9", "reviews": 229, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJ7YhzgX2XpgARcqA-p3R-dYI", "place_id": "ChIJ7YhzgX2XpgARcqA-p3R-dYI", "instagram": "Não identificado / Sem site", "reviews_int": 229, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5531984129129?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Elegance Hair Studio Cabelos e Estética", "categories": "Salão de Beleza", "address": "Rua Padre Bernardo da Silva, 312 - São Bernardo, Campinas - SP, 13030-710", "bairro": "São Bernardo", "city_state": "Campinas - SP", "whatsapp": "(19) 99956-9180", "wa_link": "https://wa.me/5519999569180", "rating": "4.8", "reviews": 228, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJd1atpcPIyJQRYdRlHp2Mb3Q", "place_id": "ChIJd1atpcPIyJQRYdRlHp2Mb3Q", "instagram": "Não identificado / Sem site", "reviews_int": 228, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5519999569180?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Estilo Selma", "categories": "Salão de Beleza", "address": "R. Goiás, 62 - Boqueirão, Santos - SP, 11050-100", "bairro": "Boqueirão", "city_state": "Santos - SP", "whatsapp": "(13) 99740-4004", "wa_link": "https://wa.me/5513997404004", "rating": "4.9", "reviews": 228, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJ43K9rQkDzpQRb_7pCfToO8U", "place_id": "ChIJ43K9rQkDzpQRb_7pCfToO8U", "instagram": "Não identificado / Sem site", "reviews_int": 228, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5513997404004?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "La Bella Studium de Beleza - Unidade I", "categories": "Salão de Beleza", "address": "Av. Conde da Boa Vista, 1084 - Boa Vista, Recife - PE, 50060-002", "bairro": "Boa Vista", "city_state": "Recife - PE", "whatsapp": "(81) 98822-2648", "wa_link": "https://wa.me/5581988222648", "rating": "4.8", "reviews": 224, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJHdmvLgEZqwcRHe7KKK9Cww0", "place_id": "ChIJHdmvLgEZqwcRHe7KKK9Cww0", "instagram": "Não identificado / Sem site", "reviews_int": 224, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5581988222648?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Studio Amélia- Saúde e Beleza", "categories": "Salão de Beleza", "address": "Avenida Conselheiro Rosa e Silva, 670 Empresarial Córdobas - Graças, Recife - PE, 52050-225", "bairro": "Graças", "city_state": "Recife - PE", "whatsapp": "(81) 99660-0190", "wa_link": "https://wa.me/5581996600190", "rating": "5.0", "reviews": 200, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJtT1QWQoZqwcR3oZhKAjT52o", "place_id": "ChIJtT1QWQoZqwcR3oZhKAjT52o", "instagram": "Não identificado / Sem site", "reviews_int": 200, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5581996600190?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Salão de Beleza Extrabella", "categories": "Salão de Beleza", "address": "galeria supermercado Assai - Av. dos Expedicionários, 4444 - Jardim América, Fortaleza - CE, 60410-424", "bairro": "Jardim América", "city_state": "Fortaleza - CE", "whatsapp": "(85) 98541-5185", "wa_link": "https://wa.me/5585985415185", "rating": "4.8", "reviews": 200, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJBec9Y6FJxwcR7u6l9kS5i1A", "place_id": "ChIJBec9Y6FJxwcR7u6l9kS5i1A", "instagram": "Não identificado / Sem site", "reviews_int": 200, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5585985415185?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Gilmar Cabeleireiros", "categories": "Salão de Beleza", "address": "R. Colibri, 43 - Costa e Silva, Joinville - SC, 89220-210", "bairro": "Costa e Silva", "city_state": "Joinville - SC", "whatsapp": "(47) 99707-7341", "wa_link": "https://wa.me/5547997077341", "rating": "5.0", "reviews": 199, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJ9WVIMz2v3pQRQ-EOxlJCCN0", "place_id": "ChIJ9WVIMz2v3pQRQ-EOxlJCCN0", "instagram": "Não identificado / Sem site", "reviews_int": 199, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5547997077341?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Donna da Beleza - By Gabriella", "categories": "Salão de Beleza", "address": "Av. Francisco de Paula Oliveira Nazareth, 1041 - Parque Industrial, Campinas - SP, 13031-440", "bairro": "Parque Industrial", "city_state": "Campinas - SP", "whatsapp": "(19) 98123-8215", "wa_link": "https://wa.me/5519981238215", "rating": "4.9", "reviews": 196, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJB7YJVdHJyJQRj7WVYc7Tzvk", "place_id": "ChIJB7YJVdHJyJQRj7WVYc7Tzvk", "instagram": "Não identificado / Sem site", "reviews_int": 196, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5519981238215?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Studio Dias", "categories": "Salão de Beleza", "address": "R. Benjamin Dias, 353 - Barreiro, Belo Horizonte - MG, 30640-520", "bairro": "Barreiro", "city_state": "Belo Horizonte - MG", "whatsapp": "(31) 99711-0622", "wa_link": "https://wa.me/5531997110622", "rating": "4.6", "reviews": 196, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJdwodRPy9pgARhgKykgG38R4", "place_id": "ChIJdwodRPy9pgARhgKykgG38R4", "instagram": "Não identificado / Sem site", "reviews_int": 196, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5531997110622?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Salão Rosa Morena", "categories": "Salão de Beleza", "address": "R. Dr. Coryntho Baldoíno Costa, 70 - Tatuapé, São Paulo - SP, 03069-070", "bairro": "Tatuapé", "city_state": "São Paulo - SP", "whatsapp": "(11) 97217-6684", "wa_link": "https://wa.me/5511972176684", "rating": "5.0", "reviews": 189, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJ88Y97Z5fzpQRz_DBwfbvWm8", "place_id": "ChIJ88Y97Z5fzpQRz_DBwfbvWm8", "instagram": "Não identificado / Sem site", "reviews_int": 189, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5511972176684?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Elegance Salon Unidade Savassi", "categories": "Salão de Beleza", "address": "R. Lavras, 226 - São Pedro, Belo Horizonte - MG, 30330-010", "bairro": "São Pedro", "city_state": "Belo Horizonte - MG", "whatsapp": "(31) 98445-9750", "wa_link": "https://wa.me/5531984459750", "rating": "5.0", "reviews": 181, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJ03Hp4q2ZpgARFxGOdJrLcAw", "place_id": "ChIJ03Hp4q2ZpgARFxGOdJrLcAw", "instagram": "Não identificado / Sem site", "reviews_int": 181, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5531984459750?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Marco Santos Cabeleireiro I Especialista em mechas e colorimetria em Niterói", "categories": "Salão de Beleza, Cabeleireiro", "address": "R. da Conceição, 154 - sala 103 - Centro, Niterói - RJ, 24020-084", "bairro": "Centro", "city_state": "Niterói - RJ", "whatsapp": "(21) 98485-6955", "wa_link": "https://wa.me/5521984856955", "rating": "4.7", "reviews": 180, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJraipesODmQARWYFDF4VsJC0", "place_id": "ChIJraipesODmQARWYFDF4VsJC0", "instagram": "Não identificado / Sem site", "reviews_int": 180, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5521984856955?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Studio de Beleza Amanda Roque", "categories": "Salão de Beleza", "address": "R. Bolívia, 126 - Vila Barcelona, Sorocaba - SP, 18025-720", "bairro": "Vila Barcelona", "city_state": "Sorocaba - SP", "whatsapp": "(15) 99815-5389", "wa_link": "https://wa.me/5515998155389", "rating": "5.0", "reviews": 174, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJLzsoHtBhz5QRwzocRq7FpY4", "place_id": "ChIJLzsoHtBhz5QRwzocRq7FpY4", "instagram": "Não identificado / Sem site", "reviews_int": 174, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5515998155389?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "STUDIO LB", "categories": "Salão de Beleza, Esteticista, Salão de sobrancelhas, Cabeleireiro, Terapeuta de drenagem linfática, Estúdio de maquiagem, Manicure", "address": "R. Paraíba, 966 - Sl 405 - Savassi, Belo Horizonte - MG, 30130-145", "bairro": "Savassi", "city_state": "Belo Horizonte - MG", "whatsapp": "(31) 99812-0300", "wa_link": "https://wa.me/5531998120300", "rating": "5.0", "reviews": 173, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJNR8seuGZpgARfMa4OX-GWnw", "place_id": "ChIJNR8seuGZpgARfMa4OX-GWnw", "instagram": "Não identificado / Sem site", "reviews_int": 173, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5531998120300?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Studio de Beleza & Cia em Santos", "categories": "Salão de Beleza, Loja de Roupa, Cuidados com os pés, Serviço de tratamento para a queda de cabelo, Manicure, Cabeleireiro", "address": "Av. Siqueira Campos, 642 - Boqueirão, Santos - SP, 11045-200", "bairro": "Boqueirão", "city_state": "Santos - SP", "whatsapp": "(13) 97422-9440", "wa_link": "https://wa.me/5513974229440", "rating": "4.8", "reviews": 171, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJoe4qvlQCzpQRNFxWiHYlWNo", "place_id": "ChIJoe4qvlQCzpQRNFxWiHYlWNo", "instagram": "Não identificado / Sem site", "reviews_int": 171, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5513974229440?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Escovei Asa Sul", "categories": "Salão de Beleza", "address": "Asa Sul CLS 413 BL A Lj 26 - Asa Sul, Brasília - DF, 70296-500", "bairro": "Asa Sul", "city_state": "BL A Lj 26 - Asa Sul", "whatsapp": "(61) 99343-3003", "wa_link": "https://wa.me/5561993433003", "rating": "4.8", "reviews": 159, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJP1W4vrYlWpMRajM9aKAZxII", "place_id": "ChIJP1W4vrYlWpMRajM9aKAZxII", "instagram": "Não identificado / Sem site", "reviews_int": 159, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5561993433003?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Cortes & Cores - Beleza e Estética", "categories": "Salão de Beleza", "address": "R. Silva Paulet, 1353 - Aldeota, Fortaleza - CE, 60120-020", "bairro": "Aldeota", "city_state": "Fortaleza - CE", "whatsapp": "(85) 99421-0969", "wa_link": "https://wa.me/5585994210969", "rating": "4.7", "reviews": 159, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJ7_49LfVIxwcRjhDvabDcJxM", "place_id": "ChIJ7_49LfVIxwcRjhDvabDcJxM", "instagram": "Não identificado / Sem site", "reviews_int": 159, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5585994210969?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Studio Zampieri", "categories": "Salão de Beleza", "address": "Rua Dona Maria Gaiarsa, 61 - Centro, Santo André - SP, 09020-145", "bairro": "Centro", "city_state": "Santo André - SP", "whatsapp": "(11) 98726-1804", "wa_link": "https://wa.me/5511987261804", "rating": "4.9", "reviews": 156, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJ7SYnhiBqzpQRlJ-K62jmn4g", "place_id": "ChIJ7SYnhiBqzpQRlJ-K62jmn4g", "instagram": "Não identificado / Sem site", "reviews_int": 156, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5511987261804?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Studio Drika Dias", "categories": "Salão de Beleza", "address": "R. Vera, 157 - Jardim Santa Mena, Guarulhos - SP, 07096-020", "bairro": "Jardim Santa Mena", "city_state": "Guarulhos - SP", "whatsapp": "(11) 96551-9913", "wa_link": "https://wa.me/5511965519913", "rating": "4.7", "reviews": 153, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJd6WreKz1zpQRDRKbr8FSi40", "place_id": "ChIJd6WreKz1zpQRDRKbr8FSi40", "instagram": "Não identificado / Sem site", "reviews_int": 153, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5511965519913?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Belos Fios Cabeleireiros", "categories": "Salão de Beleza, Cabeleireiro, Serviços para casamento", "address": "R. Eng. Franco Zampari, 48 - Vila Euclides, São Bernardo do Campo - SP, 09725-540", "bairro": "Vila Euclides", "city_state": "São Bernardo do Campo - SP", "whatsapp": "(11) 99912-6098", "wa_link": "https://wa.me/5511999126098", "rating": "4.9", "reviews": 151, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJSXjsJMpDzpQRlFjiuvgaIog", "place_id": "ChIJSXjsJMpDzpQRlFjiuvgaIog", "instagram": "Não identificado / Sem site", "reviews_int": 151, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5511999126098?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "A2 Salão de Beleza", "categories": "Salão de Beleza", "address": "Galeria Jardim - R. Comendador Franco Ferreira, 327 - Lj 01 - San Martin, Recife - PE, 50761-310", "bairro": "San Martin", "city_state": "Recife - PE", "whatsapp": "(81) 98455-1978", "wa_link": "https://wa.me/5581984551978", "rating": "4.9", "reviews": 150, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJrXhlmTUZqwcRtMWm8Ytx8R8", "place_id": "ChIJrXhlmTUZqwcRtMWm8Ytx8R8", "instagram": "Não identificado / Sem site", "reviews_int": 150, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5581984551978?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Verbena Studio de Beleza", "categories": "Salão de Beleza, Cabeleireiro, Manicure", "address": "EDIFÍCIO IMPRENSA E GUTEMBERG, Av. Augusto de Lima, 407 - Lourdes, Belo Horizonte - MG, 30190-000", "bairro": "Lourdes", "city_state": "Av. Augusto de Lima, 407 - Lourdes", "whatsapp": "(31) 99641-5944", "wa_link": "https://wa.me/5531996415944", "rating": "5.0", "reviews": 146, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJUSlYQsKZpgAR1DVTBLPMpg4", "place_id": "ChIJUSlYQsKZpgAR1DVTBLPMpg4", "instagram": "Não identificado / Sem site", "reviews_int": 146, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5531996415944?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Glicy Fernandes Studio de Beleza", "categories": "Salão de Beleza, Estúdio de maquiagem, Cabeleireiro", "address": "Júlio Rusconi 51 Jardim Itanguá - Zona Oeste, Sorocaba - SP, 18056-160", "bairro": "Zona Oeste", "city_state": "Sorocaba - SP", "whatsapp": "(15) 98103-8396", "wa_link": "https://wa.me/5515981038396", "rating": "5.0", "reviews": 145, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJA4MwX-OLxZQRUBgAQaEVw6Q", "place_id": "ChIJA4MwX-OLxZQRUBgAQaEVw6Q", "instagram": "Não identificado / Sem site", "reviews_int": 145, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5515981038396?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Salão Beleza Tofani Studio", "categories": "Salão de Beleza, Estúdio de maquiagem, Manicure, Cabeleireiro", "address": "R. Marcílio Dias, 268 - Nova Suíça, Belo Horizonte - MG, 30421-023", "bairro": "Nova Suíça", "city_state": "Belo Horizonte - MG", "whatsapp": "(31) 99607-9125", "wa_link": "https://wa.me/5531996079125", "rating": "5.0", "reviews": 144, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJvWHWeiCXpgAR3B_hODbOl3M", "place_id": "ChIJvWHWeiCXpgAR3B_hODbOl3M", "instagram": "Não identificado / Sem site", "reviews_int": 144, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5531996079125?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Salão de Beleza Rk Concept - Ingá", "categories": "Salão de Beleza", "address": "R. Doutor Pereira Nunes, 1 - Ingá, Niterói - RJ, 24210-430", "bairro": "Ingá", "city_state": "Niterói - RJ", "whatsapp": "(21) 97200-8286", "wa_link": "https://wa.me/5521972008286", "rating": "4.9", "reviews": 141, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJicwzQ1qDmQARfdTx_QbgWTA", "place_id": "ChIJicwzQ1qDmQARfdTx_QbgWTA", "instagram": "Não identificado / Sem site", "reviews_int": 141, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5521972008286?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "You Beauty Salão", "categories": "Salão de Beleza, Cabeleireiro, Manicure", "address": "R. Walter Bezerra de Sá, 155 - Dionísio Torres, Fortaleza - CE, 60135-225", "bairro": "Dionísio Torres", "city_state": "Fortaleza - CE", "whatsapp": "(85) 99719-6452", "wa_link": "https://wa.me/5585997196452", "rating": "4.8", "reviews": 139, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJmVvxxvJIxwcR0GZbonP0O1E", "place_id": "ChIJmVvxxvJIxwcR0GZbonP0O1E", "instagram": "Não identificado / Sem site", "reviews_int": 139, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5585997196452?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Salão de beleza Lopes Coiffeur", "categories": "Salão de Beleza", "address": "297 Rua José Peroba Edf Atlanta Empresarial, Térreo, Stiep - STIEP, Salvador - BA, 41770-235", "bairro": "STIEP", "city_state": "Stiep - ST", "whatsapp": "(71) 99206-2522", "wa_link": "https://wa.me/5571992062522", "rating": "4.8", "reviews": 136, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJl6NHN98xNAcRGAUutEpd-6c", "place_id": "ChIJl6NHN98xNAcRGAUutEpd-6c", "instagram": "Não identificado / Sem site", "reviews_int": 136, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5571992062522?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}, {"name": "Espaço Carol Gomes Centro Belo Horizonte", "categories": "Salão de Beleza, Depilação, Estúdio de maquiagem, Manicure, Cabeleireiro", "address": "Av. Afonso Pena, 578 - 11º andar - Sala 1104 - Centro, Belo Horizonte - MG, 30130-001", "bairro": "Centro", "city_state": "Belo Horizonte - MG", "whatsapp": "(31) 97315-4506", "wa_link": "https://wa.me/5531973154506", "rating": "4.9", "reviews": 127, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJuTVFDuyZpgAR0VBkxYITlLk", "place_id": "ChIJuTVFDuyZpgAR0VBkxYITlLk", "instagram": "Não identificado / Sem site", "reviews_int": 127, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5531973154506?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta."}];
+
+    let currentLimit = 15;
+    let sentLeads = JSON.parse(localStorage.getItem('sent_saloes_leads') || '[]');
+
+    function saveSentState() {
+      localStorage.setItem('sent_saloes_leads', JSON.stringify(sentLeads));
+      updateStats();
+    }
+
+    function toggleSent(leadName) {
+      if (sentLeads.includes(leadName)) {
+        sentLeads = sentLeads.filter(name => name !== leadName);
+      } else {
+        sentLeads.push(leadName);
+      }
+      saveSentState();
+      renderLeads();
+    }
+
+    function updateStats() {
+      const visibleLeads = getFilteredLeads();
+      const sentCount = visibleLeads.filter(lead => sentLeads.includes(lead.name)).length;
+      document.getElementById('sent-count').textContent = sentCount;
+      document.getElementById('pending-count').textContent = visibleLeads.length - sentCount;
+    }
+
+    function setLimit(limit) {
+      currentLimit = limit;
+      document.querySelectorAll('.tab-btn').forEach((btn, idx) => {
+        btn.classList.remove('active');
+        if ((limit === 15 && idx === 0) || (limit === 30 && idx === 1) || (limit === 50 && idx === 2)) {
+          btn.classList.add('active');
+        }
+      });
+      renderLeads();
+    }
+
+    function getFilteredLeads() {
+      const query = document.getElementById('search-input')?.value.toLowerCase().trim() || '';
+      let list = LEADS_DATA;
+      if (query) {
+        list = list.filter(l => 
+          l.name.toLowerCase().includes(query) || 
+          l.city_state.toLowerCase().includes(query) ||
+          l.bairro.toLowerCase().includes(query) ||
+          l.whatsapp.includes(query)
+        );
+      }
+      return list.slice(0, currentLimit);
+    }
+
+    function copyLeadMessage(index, btn) {
+      const visible = getFilteredLeads();
+      const lead = visible[index];
+      if (!lead) return;
+      navigator.clipboard.writeText(lead.mensagem_personalizada).then(() => {
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '✅ Copiado!';
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+        }, 1500);
+      });
+    }
+
+    function renderLeads() {
+      const container = document.getElementById('leads-container');
+      container.innerHTML = '';
+
+      const list = getFilteredLeads();
+
+      if (list.length === 0) {
+        container.innerHTML = '<div style="text-align: center; color: var(--muted); padding: 3rem;">Nenhum salão encontrado para a busca.</div>';
+        updateStats();
+        return;
+      }
+
+      list.forEach((lead, index) => {
+        const isSent = sentLeads.includes(lead.name);
+        const card = document.createElement('div');
+        card.className = `lead-card ${isSent ? 'sent' : ''}`;
+
+        const safeName = lead.name.replace(/'/g, "\'");
+
+        card.innerHTML = `
+          <div class="lead-info">
+            <div class="lead-header">
+              <span class="lead-number">#${String(index + 1).padStart(2, '0')}</span>
+              <span class="lead-name">${lead.name}</span>
+              <span class="rating-badge">★ ${lead.rating} (${lead.reviews} avaliações)</span>
+            </div>
+            <div class="lead-details">
+              <div class="detail-item"><strong>WhatsApp:</strong> ${lead.whatsapp}</div>
+              <div class="detail-item"><strong>Localização:</strong> ${lead.bairro} • ${lead.city_state}</div>
+              <div class="detail-item"><strong>Categorias:</strong> ${lead.categories}</div>
+            </div>
+            <div class="msg-preview">${lead.mensagem_personalizada}</div>
+          </div>
+          <div class="lead-actions">
+            <a href="${lead.wa_link_com_mensagem}" target="_blank" class="btn-whatsapp" onclick="if(!sentLeads.includes('${safeName}')) toggleSent('${safeName}')">
+              <span>⚡ Abrir WhatsApp</span>
+            </a>
+            <button class="btn-copy" onclick="copyLeadMessage(${index}, this)">
+              📋 Copiar Mensagem
+            </button>
+            <button class="btn-mark ${isSent ? 'active' : ''}" onclick="toggleSent('${safeName}')">
+              ${isSent ? '✓ Mensagem Enviada' : 'Marcar como Enviado'}
+            </button>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+
+      updateStats();
+    }
+
+    // Initial render
+    renderLeads();
+  </script>
+</body>
+</html>
