@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt" id="html-root">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Painel de Prospecção Internacional • Brasil 🇧🇷 & Portugal 🇵🇹</title>
+  <title>Painel de Prospecção • Clínicas Odontológicas</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -22,9 +22,6 @@
       --text: #f3f4f6;
       --muted: #94a3b8;
       --success: #10b981;
-      --gold: #f59e0b;
-      --pt-red: #ef4444;
-      --pt-green: #10b981;
     }
 
     * {
@@ -34,24 +31,24 @@
     }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
       background-color: var(--bg);
       background-image: 
-        radial-gradient(circle at 12% 15%, rgba(14, 165, 233, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 88% 85%, rgba(37, 211, 102, 0.06) 0%, transparent 40%);
+        radial-gradient(circle at 15% 15%, rgba(14, 165, 233, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(56, 189, 248, 0.06) 0%, transparent 40%);
       color: var(--text);
       min-height: 100vh;
       padding: 2.5rem 1.5rem;
     }
 
     .container {
-      max-width: 1140px;
+      max-width: 1100px;
       margin: 0 auto;
     }
 
     header {
       text-align: center;
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
     }
 
     .badge-user {
@@ -61,7 +58,7 @@
       background: rgba(14, 165, 233, 0.12);
       border: 1px solid rgba(14, 165, 233, 0.3);
       color: #38bdf8;
-      padding: 0.45rem 1.1rem;
+      padding: 0.4rem 1rem;
       border-radius: 9999px;
       font-size: 0.9rem;
       font-weight: 700;
@@ -81,117 +78,54 @@
 
     p.subtitle {
       color: var(--muted);
-      font-size: 1.05rem;
-      max-width: 780px;
+      font-size: 1.1rem;
+      max-width: 700px;
       margin: 0 auto;
       line-height: 1.5;
     }
 
-    /* Country Switcher Bar */
-    .country-bar {
+    /* Country Pills Bar */
+    .country-pills-bar {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 0.75rem;
-      margin: 2rem 0 1.25rem;
-      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.5rem;
     }
 
-    .country-btn {
-      background: rgba(15, 23, 42, 0.85);
+    .country-pill-btn {
+      background: rgba(15, 23, 42, 0.9);
       border: 1px solid var(--card-border);
       color: var(--muted);
-      padding: 0.75rem 1.5rem;
-      border-radius: 0.9rem;
-      font-size: 1rem;
+      padding: 0.5rem 1.1rem;
+      border-radius: 9999px;
+      font-size: 0.9rem;
       font-weight: 700;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 0.6rem;
-      transition: all 0.25s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      gap: 0.45rem;
+      transition: all 0.2s ease;
     }
 
-    .country-btn:hover {
-      border-color: rgba(14, 165, 233, 0.5);
+    .country-pill-btn:hover {
       color: #fff;
-      transform: translateY(-2px);
+      border-color: rgba(14, 165, 233, 0.4);
     }
 
-    .country-btn.active {
-      background: linear-gradient(135deg, rgba(14, 165, 233, 0.25) 0%, rgba(37, 211, 102, 0.2) 100%);
+    .country-pill-btn.active {
+      background: rgba(14, 165, 233, 0.18);
       border-color: #38bdf8;
       color: #ffffff;
-      box-shadow: 0 0 20px rgba(14, 165, 233, 0.3);
+      box-shadow: 0 0 12px rgba(14, 165, 233, 0.25);
     }
 
-    .country-btn .badge-count {
-      background: rgba(255, 255, 255, 0.12);
-      padding: 0.2rem 0.6rem;
+    .country-pill-btn .pill-count {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 0.15rem 0.45rem;
       border-radius: 999px;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 800;
-    }
-
-    /* Active Message Template Editor Box */
-    .msg-template-box {
-      background: linear-gradient(135deg, rgba(14, 165, 233, 0.08) 0%, rgba(37, 211, 102, 0.06) 100%);
-      border: 1px solid rgba(14, 165, 233, 0.3);
-      border-radius: 1.1rem;
-      padding: 1.25rem 1.5rem;
-      margin-bottom: 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .msg-template-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .msg-template-title {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: #38bdf8;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .msg-template-tag {
-      background: rgba(14, 165, 233, 0.2);
-      color: #7dd3fc;
-      padding: 0.2rem 0.6rem;
-      border-radius: 0.4rem;
-      font-size: 0.78rem;
-      font-weight: 700;
-    }
-
-    .msg-template-input {
-      background: rgba(11, 17, 32, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 0.75rem;
-      padding: 0.75rem 1rem;
-      color: #fff;
-      font-size: 0.95rem;
-      font-family: inherit;
-      line-height: 1.45;
-      width: 100%;
-      resize: vertical;
-      min-height: 55px;
-      outline: none;
-      transition: all 0.2s;
-    }
-
-    .msg-template-input:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 10px var(--primary-glow);
     }
 
     /* Stats Grid */
@@ -231,7 +165,6 @@
     .stat-value.blue { color: #38bdf8; }
     .stat-value.green { color: var(--whatsapp-green); }
     .stat-value.cyan { color: #22d3ee; }
-    .stat-value.gold { color: var(--gold); }
 
     /* Safety Box */
     .safety-box {
@@ -303,11 +236,11 @@
       background: rgba(15, 23, 42, 0.85);
       border: 1px solid var(--card-border);
       border-radius: 0.85rem;
-      padding: 0.65rem 1.2rem;
+      padding: 0.6rem 1rem;
       color: #fff;
       font-size: 0.95rem;
       outline: none;
-      min-width: 290px;
+      min-width: 260px;
     }
 
     .search-input:focus {
@@ -353,7 +286,7 @@
     .lead-header {
       display: flex;
       align-items: center;
-      gap: 0.65rem;
+      gap: 0.75rem;
       flex-wrap: wrap;
     }
 
@@ -366,31 +299,9 @@
       color: var(--muted);
     }
 
-    .country-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      padding: 0.2rem 0.65rem;
-      border-radius: 0.5rem;
-      font-size: 0.8rem;
-      font-weight: 700;
-    }
-
-    .country-pill.br {
-      background: rgba(37, 211, 102, 0.12);
-      color: #4ade80;
-      border: 1px solid rgba(37, 211, 102, 0.3);
-    }
-
-    .country-pill.pt {
-      background: rgba(239, 68, 68, 0.12);
-      color: #f87171;
-      border: 1px solid rgba(239, 68, 68, 0.3);
-    }
-
     .lead-name {
       font-family: 'Outfit', sans-serif;
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       font-weight: 700;
       color: #ffffff;
     }
@@ -403,7 +314,7 @@
       color: #ffb84d;
       padding: 0.25rem 0.6rem;
       border-radius: 0.5rem;
-      font-size: 0.85rem;
+      font-size: 0.875rem;
       font-weight: 700;
     }
 
@@ -425,22 +336,6 @@
       color: #e5e7eb;
     }
 
-    .detail-item .phone-val {
-      font-family: 'JetBrains Mono', monospace;
-      color: #38bdf8;
-      font-weight: 700;
-    }
-
-    .msg-box-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.75rem;
-      color: var(--muted);
-      margin-top: 0.4rem;
-      font-weight: 600;
-    }
-
     .msg-preview {
       background: rgba(11, 17, 32, 0.7);
       border: 1px solid rgba(255, 255, 255, 0.06);
@@ -449,7 +344,7 @@
       font-size: 0.875rem;
       color: #e2e8f0;
       line-height: 1.5;
-      margin-top: 0.25rem;
+      margin-top: 0.35rem;
       white-space: pre-line;
       max-height: 130px;
       overflow-y: auto;
@@ -460,7 +355,7 @@
       display: flex;
       flex-direction: column;
       gap: 0.65rem;
-      min-width: 210px;
+      min-width: 200px;
     }
 
     .btn-whatsapp {
@@ -548,78 +443,61 @@
 
   <div class="container">
     <header>
-      <div class="badge-user" id="header-badge">🌍 Prospecção Internacional • Leonardo</div>
-      <h1 id="header-title">Painel de Leads • Clínicas Odontológicas & Dentárias</h1>
-      <p class="subtitle" id="header-subtitle">Contatos e contactos de consultórios e clínicas no <strong>Brasil 🇧🇷</strong> e <strong>Portugal 🇵🇹</strong> com WhatsApp direto verificado, sem website e com excelente reputação no Google Maps.</p>
-    </header>
-
-    <!-- Country Selector -->
-    <div class="country-bar">
-      <button class="country-btn" id="btn-country-pt" onclick="setCountry('PT')">
-        <span>🇵🇹 Portugal</span>
-        <span class="badge-count" id="count-pt">26</span>
-      </button>
-      <button class="country-btn active" id="btn-country-br" onclick="setCountry('BR')">
-        <span>🇧🇷 Brasil</span>
-        <span class="badge-count" id="count-br">50</span>
-      </button>
-      <button class="country-btn" id="btn-country-all" onclick="setCountry('ALL')">
-        <span>🌐 Todos os Países</span>
-        <span class="badge-count" id="count-all">76</span>
-      </button>
-    </div>
-
-    <!-- Active Message Template Editor Box -->
-    <div class="msg-template-box">
-      <div class="msg-template-header">
-        <div class="msg-template-title">
-          <span>💬 Mensagem Ativa de Prospecção</span>
-          <span class="msg-template-tag" id="msg-lang-badge">🇧🇷 Português do Brasil (PT-BR)</span>
-        </div>
-        <button onclick="restoreDefaultMessage()" style="background: transparent; border: 1px solid rgba(255,255,255,0.15); color: var(--muted); font-size: 0.75rem; padding: 0.25rem 0.6rem; border-radius: 0.4rem; cursor: pointer;">
-          ↺ Restaurar Mensagem Padrão
+      <div class="badge-user">🦷 Prospecção Ativa • Leonardo</div>
+      <h1>Painel de Leads • Clínicas Odontológicas</h1>
+      <p class="subtitle">Contatos de consultórios e clínicas odontológicas com WhatsApp direto verificado, sem site cadastrado e com alta reputação no Google Maps.</p>
+      
+      <!-- Country Pills -->
+      <div class="country-pills-bar">
+        <button class="country-pill-btn active" id="pill-br" onclick="setCountry('BR')">
+          <svg width="18" height="13" viewBox="0 0 720 504" style="border-radius:2px;"><rect width="720" height="504" fill="#009c3b"/><polygon points="360,42 678,252 360,462 42,252" fill="#ffdf00"/><circle cx="360" cy="252" r="126" fill="#002776"/><path d="M 234 252 A 126 126 0 0 0 486 252 A 136 136 0 0 1 234 252" fill="#ffffff"/></svg>
+          <span>Brasil</span>
+          <span class="pill-count">50</span>
+        </button>
+        <button class="country-pill-btn" id="pill-pt" onclick="setCountry('PT')">
+          <svg width="18" height="13" viewBox="0 0 600 400" style="border-radius:2px;"><rect width="240" height="400" fill="#046A38"/><rect x="240" width="360" height="400" fill="#DA291C"/><circle cx="240" cy="200" r="80" fill="#FFCC29"/><circle cx="240" cy="200" r="50" fill="#DA291C"/><rect x="225" y="175" width="30" height="50" fill="#FFFFFF"/></svg>
+          <span>Portugal</span>
+          <span class="pill-count">26</span>
+        </button>
+        <button class="country-pill-btn" id="pill-all" onclick="setCountry('ALL')">
+          <span>🌐 Todos</span>
+          <span class="pill-count">76</span>
         </button>
       </div>
-      <textarea id="active-msg-input" class="msg-template-input" oninput="onCustomMessageChange(this.value)">Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.</textarea>
-      <small style="color: var(--muted); font-size: 0.75rem;">Esta mensagem é incorporada automaticamente em todos os botões <strong>⚡ Abrir WhatsApp</strong> e <strong>📋 Copiar</strong> da lista abaixo.</small>
-    </div>
+    </header>
 
     <div class="stats-grid">
       <div class="stat-card">
-        <span class="stat-label" id="lbl-meta">Meta Diária Segura</span>
+        <span class="stat-label">Meta Diária Segura</span>
         <span class="stat-value blue" id="meta-count">25 - 30 Envios</span>
       </div>
       <div class="stat-card">
-        <span class="stat-label" id="lbl-sent">Mensagens Enviadas</span>
+        <span class="stat-label">Mensagens Enviadas</span>
         <span class="stat-value green" id="sent-count">0</span>
       </div>
       <div class="stat-card">
-        <span class="stat-label" id="lbl-pending">Pendentes na Fila</span>
-        <span class="stat-value cyan" id="pending-count">0</span>
-      </div>
-      <div class="stat-card">
-        <span class="stat-label" id="lbl-total">Total Disponível</span>
-        <span class="stat-value gold" id="total-available">50</span>
+        <span class="stat-label">Pendentes na Fila</span>
+        <span class="stat-value cyan" id="pending-count">15</span>
       </div>
     </div>
 
     <div class="safety-box">
       <span class="icon">🛡️</span>
       <div>
-        <h4 id="safety-title">Cadência Internacional Recomendada (Proteção do seu WhatsApp)</h4>
-        <p id="safety-text">
-          Envie para <strong>25 a 30 contactos por dia</strong>, aguardando de <strong>30 a 60 segundos</strong> entre cada mensagem. O WhatsApp reconhece como envio 100% manual e orgânico para telemóveis de Portugal (+351) e do Brasil (+55)!
+        <h4>Cadência Recomendada (Proteção do seu WhatsApp)</h4>
+        <p>
+          Envie para <strong>25 a 30 contatos por dia</strong>, aguardando de <strong>30 a 60 segundos</strong> entre cada mensagem. O WhatsApp reconhece como envio 100% manual e orgânico!
         </p>
       </div>
     </div>
 
     <div class="controls-bar">
       <div class="tabs">
-        <button class="tab-btn" onclick="setLimit(15)" id="btn-top15">🎯 Top 15</button>
+        <button class="tab-btn active" onclick="setLimit(15)" id="btn-top15">🎯 Top 15 Mais Populares</button>
         <button class="tab-btn" onclick="setLimit(30)" id="btn-top30">🔥 Top 30 Recomendados</button>
-        <button class="tab-btn active" onclick="setLimit(100)" id="btn-all">📋 Todos</button>
+        <button class="tab-btn" onclick="setLimit(100)" id="btn-all">📋 Todos (<span id="total-badge">50</span>)</button>
       </div>
-      <input type="text" class="search-input" id="search-input" placeholder="🔍 Filtrar por nome, cidade (ex: Lisboa, Porto, SP, RJ)..." oninput="renderLeads()">
+      <input type="text" class="search-input" id="search-input" placeholder="🔍 Filtrar por nome ou cidade..." oninput="renderLeads()">
     </div>
 
     <div class="leads-list" id="leads-container"></div>
@@ -628,15 +506,9 @@
   <script>
     const LEADS_DATA = [{"name": "Oral Vitta", "categories": "Clínica odontológica, Dentista, Periodontia e implantes dentários, Endodontista, Cirurgião dentista, Ortodontista, Odontopediatra, Clínica de odontopediatria, Periodontista", "address": "R. Arruda Câmara, 369 - Vila Peri, Fortaleza - CE, 60730-160", "bairro": "Vila Peri", "city_state": "Fortaleza - CE", "whatsapp": "(85) 99949-3145", "wa_link": "https://wa.me/5585999493145", "rating": "4.8", "reviews": 1813, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJSzfk4jBMxwcRKYuK37f6t7o", "place_id": "ChIJSzfk4jBMxwcRKYuK37f6t7o", "instagram": "Não identificado / Sem site", "reviews_int": 1813, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5585999493145?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Sorrismed - Clínica Médica e Odontológica", "categories": "Dentista, Médico", "address": "Rod. Armando Calil Bulos, 6100 - Ingleses Norte, Florianópolis - SC, 88058-001", "bairro": "Ingleses Norte", "city_state": "Florianópolis - SC", "whatsapp": "(48) 99661-2975", "wa_link": "https://wa.me/5548996612975", "rating": "5.0", "reviews": 679, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJSSZPyeFKaGwRgLIP6CXehI0", "place_id": "ChIJSSZPyeFKaGwRgLIP6CXehI0", "instagram": "Não identificado / Sem site", "reviews_int": 679, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5548996612975?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "OdontoCompany Copacabana - Dentista Implante, Facetas, Canal.", "categories": "Clínica odontológica, Periodontia e implantes dentários, Dentista, Cirurgião dentista, Ortodontista", "address": "6, Rua Siqueira Campos, 53 - Copacabana, Rio de Janeiro - RJ, 22031-072", "bairro": "Copacabana", "city_state": "Rua Siqueira Campos, 53 - Copacabana", "whatsapp": "(21) 96014-1022", "wa_link": "https://wa.me/5521960141022", "rating": "4.7", "reviews": 593, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJ8zv7mlrVmwARSbAw3L1jhxM", "place_id": "ChIJ8zv7mlrVmwARSbAw3L1jhxM", "instagram": "Não identificado / Sem site", "reviews_int": 593, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5521960141022?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Vitta Odontologia Integrada", "categories": "Dentista", "address": "scn quadra 02, bloco d 333/334 - Asa Norte, Brasília - DF, 70712-903", "bairro": "Asa Norte", "city_state": "bloco d 333/334 - Asa Norte", "whatsapp": "(61) 99269-6820", "wa_link": "https://wa.me/5561992696820", "rating": "5.0", "reviews": 591, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJ__8jOQEwWpMRVGrQCFSTxkg", "place_id": "ChIJ__8jOQEwWpMRVGrQCFSTxkg", "instagram": "Não identificado / Sem site", "reviews_int": 591, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5561992696820?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Toque Dental", "categories": "Clínica odontológica", "address": "Av. Eng. Domingos Ferreira, 2391 - Boa Viagem, Recife - PE, 51020-031", "bairro": "Boa Viagem", "city_state": "Recife - PE", "whatsapp": "(81) 99103-8596", "wa_link": "https://wa.me/5581991038596", "rating": "5.0", "reviews": 532, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJX2qdhd8fqwcRXr2rDXP_MrQ", "place_id": "ChIJX2qdhd8fqwcRXr2rDXP_MrQ", "instagram": "Não identificado / Sem site", "reviews_int": 532, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5581991038596?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "DENTISTA 24HS/ Clínica odontológica/ Urgência odontológica/ dentista Florianópolis/ consultório odontológico.", "categories": "Clínica odontológica", "address": "R. Bento Gonçalves, 183 - Centro, Florianópolis - SC, 88010-080", "bairro": "Centro", "city_state": "Florianópolis - SC", "whatsapp": "(48) 98486-5576", "wa_link": "https://wa.me/5548984865576", "rating": "5.0", "reviews": 429, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJfbrE7NM5J5URhslIfOC5L_0", "place_id": "ChIJfbrE7NM5J5URhslIfOC5L_0", "instagram": "Não identificado / Sem site", "reviews_int": 429, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5548984865576?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Barra Clínica Odontológica Urgência", "categories": "Clínica odontológica, Serviço dentário de emergência", "address": "Próximo a Perinatal, no Dimension Office Park, bloco Lagoa 1 - Avenida Embaixador Abelardo Bueno, numero 1, sala 211, Rio de Janeiro - RJ, 22775-040", "bairro": "Barra Olímpica", "city_state": "Rio de Janeiro - RJ", "whatsapp": "(21) 99122-9709", "wa_link": "https://wa.me/5521991229709", "rating": "4.9", "reviews": 393, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJZTsLd5DbmwARGSJVwberRrE", "place_id": "ChIJZTsLd5DbmwARGSJVwberRrE", "instagram": "Não identificado / Sem site", "reviews_int": 393, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5521991229709?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "SMARTODONTO", "categories": "Clínica odontológica, Dentista cosmético, Dentista, Ortodontista", "address": "Av. Afonso Pena, Qd 20 - Lt 22 - Vila Jardim São Judas Tadeu, Goiânia - GO, 74685-020", "bairro": "Vila Jardim São Judas Tadeu", "city_state": "Goiânia - GO", "whatsapp": "(62) 99382-3589", "wa_link": "https://wa.me/5562993823589", "rating": "5.0", "reviews": 389, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJBTCJy-PzXpMRrgCGidKRUss", "place_id": "ChIJBTCJy-PzXpMRrgCGidKRUss", "instagram": "Não identificado / Sem site", "reviews_int": 389, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5562993823589?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "G.A.Odontologia® - Clínica Odontológica em Guarulhos", "categories": "Clínica odontológica", "address": "R. José Pedro da Silva, 170 - Parque Continental II, Guarulhos - SP, 07084-300", "bairro": "Parque Continental II", "city_state": "Guarulhos - SP", "whatsapp": "(11) 96390-7625", "wa_link": "https://wa.me/5511963907625", "rating": "5.0", "reviews": 323, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJ3zFIjFH1zpQRGKSw92RUoyk", "place_id": "ChIJ3zFIjFH1zpQRGKSw92RUoyk", "instagram": "Não identificado / Sem site", "reviews_int": 323, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5511963907625?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Clinisul", "categories": "Clínica odontológica", "address": "SGAS II St. de Grandes Áreas Sul 616 - Asa Sul, Brasília - DF, 70200-760", "bairro": "Asa Sul", "city_state": "Brasília - DF", "whatsapp": "(61) 99949-0274", "wa_link": "https://wa.me/5561999490274", "rating": "4.8", "reviews": 294, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJUY87eYslWpMRxFtk_t93KEw", "place_id": "ChIJUY87eYslWpMRxFtk_t93KEw", "instagram": "Não identificado / Sem site", "reviews_int": 294, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5561999490274?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Clínica Brasil Sorriso - Gonzaga", "categories": "Dentista, Clínica odontológica, Cirurgião dentista", "address": "Av. Mal. Floriano Peixoto, 41 - Gonzaga, Santos - SP, 11060-301", "bairro": "Gonzaga", "city_state": "Santos - SP", "whatsapp": "(13) 99653-3064", "wa_link": "https://wa.me/5513996533064", "rating": "4.9", "reviews": 263, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJg9I8uhoDzpQRseuVFxY1tHU", "place_id": "ChIJg9I8uhoDzpQRseuVFxY1tHU", "instagram": "Não identificado / Sem site", "reviews_int": 263, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5513996533064?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Clínica Adente", "categories": "Clínica odontológica", "address": "Condomínio Edifício Fernandez - Av. Sete de Setembro, 302 - Sala 406 a 410, 4° andar - Centro, Salvador - BA, 40020-455", "bairro": "Centro", "city_state": "Salvador - BA", "whatsapp": "(71) 99323-0358", "wa_link": "https://wa.me/5571993230358", "rating": "4.9", "reviews": 254, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJkSeNUP4FFgcRMpcop_kgNIU", "place_id": "ChIJkSeNUP4FFgcRMpcop_kgNIU", "instagram": "Não identificado / Sem site", "reviews_int": 254, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5571993230358?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "OdontoCompany Niterói", "categories": "Clínica odontológica, Periodontia e implantes dentários, Dentista, Ortodontista", "address": "R. São João, 42 - Centro, Niterói - RJ, 24020-040", "bairro": "Centro", "city_state": "Niterói - RJ", "whatsapp": "(21) 97222-0363", "wa_link": "https://wa.me/5521972220363", "rating": "3.8", "reviews": 251, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJn9jnn8aDmQARfbjdb_auwgQ", "place_id": "ChIJn9jnn8aDmQARfbjdb_auwgQ", "instagram": "Não identificado / Sem site", "reviews_int": 251, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5521972220363?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Clínica Ayra Estética Orofacial", "categories": "Clínica odontológica, Endodontista, Odontopediatra, Cirurgião", "address": "Clínica Ayra, Ed. Max Center - Av. Antônio Carlos Magalhães, 846 - 1° andar, Sala 115 - Itaigara, Salvador - BA, 40210-755", "bairro": "Itaigara", "city_state": "Salvador - BA", "whatsapp": "(71) 99103-8527", "wa_link": "https://wa.me/5571991038527", "rating": "4.9", "reviews": 246, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJ6SdSOo8FFgcR868aeccvOGo", "place_id": "ChIJ6SdSOo8FFgcR868aeccvOGo", "instagram": "Não identificado / Sem site", "reviews_int": 246, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5571991038527?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Fialho Odontologia", "categories": "Dentista", "address": "Av. Getúlio Vargas, 874 - Sl 1603 - Savassi, Belo Horizonte - MG, 30112-020", "bairro": "Savassi", "city_state": "Belo Horizonte - MG", "whatsapp": "(31) 98426-7230", "wa_link": "https://wa.me/5531984267230", "rating": "5.0", "reviews": 244, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJnzYpp2mZpgARfIobHXKcdsI", "place_id": "ChIJnzYpp2mZpgARfIobHXKcdsI", "instagram": "Não identificado / Sem site", "reviews_int": 244, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5531984267230?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Aria Clínica de Odontologia Avançada", "categories": "Clínica odontológica", "address": "R. Inambu, 2949 - Costa e Silva, Joinville - SC, 89220-002", "bairro": "Costa e Silva", "city_state": "Joinville - SC", "whatsapp": "(47) 98914-3119", "wa_link": "https://wa.me/5547989143119", "rating": "4.9", "reviews": 242, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJlxd8te6l3pQRVA_rSMoEuXw", "place_id": "ChIJlxd8te6l3pQRVA_rSMoEuXw", "instagram": "Não identificado / Sem site", "reviews_int": 242, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5547989143119?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Dentarth Núcleo de Saúde Integrada", "categories": "Clínica odontológica, Dentista cosmético, Dentista, Cirurgião dentista", "address": "R. Frei Gaspar, 941 - Sl 405 - Assunção, São Bernardo do Campo - SP, 09720-440", "bairro": "Assunção", "city_state": "São Bernardo do Campo - SP", "whatsapp": "(11) 96096-9321", "wa_link": "https://wa.me/5511960969321", "rating": "4.9", "reviews": 240, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJEcoA9mZBzpQR_b0hVfKTmEE", "place_id": "ChIJEcoA9mZBzpQR_b0hVfKTmEE", "instagram": "Não identificado / Sem site", "reviews_int": 240, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5511960969321?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "OdontoCompany", "categories": "Clínica odontológica", "address": "Setor Comercial Sul Bloco C Quadra 2 Loja 74 - Asa Sul, Brasília - DF, 70302-907", "bairro": "Asa Sul", "city_state": "Brasília - DF", "whatsapp": "(61) 99249-5272", "wa_link": "https://wa.me/5561992495272", "rating": "4.0", "reviews": 238, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJN672Nuc6WpMRElorxUDwMu4", "place_id": "ChIJN672Nuc6WpMRElorxUDwMu4", "instagram": "Não identificado / Sem site", "reviews_int": 238, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5561992495272?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Sorridente", "categories": "Clínica odontológica", "address": "PITUBA PARQUE CENTER - Itaigara, Salvador - BA, 41815-200", "bairro": "Itaigara", "city_state": "Salvador - BA", "whatsapp": "(71) 98107-8217", "wa_link": "https://wa.me/5571981078217", "rating": "4.3", "reviews": 200, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJycSYM1wbFgcRISTiA1jFM4w", "place_id": "ChIJycSYM1wbFgcRISTiA1jFM4w", "instagram": "Não identificado / Sem site", "reviews_int": 200, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5571981078217?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "CARAS - Centro Clínico de Odontologia", "categories": "Clínica odontológica, Dentista, Periodontia e implantes dentários, Cirurgião dentista, Ortodontista", "address": "Centro Empresarial Norte - SRTVN Quadra 701 Conj C, loja Térreo 218 - Asa Norte, Brasília - DF, 70719-903", "bairro": "Asa Norte", "city_state": "Centro Empresarial Norte - SR", "whatsapp": "(61) 99224-4153", "wa_link": "https://wa.me/5561992244153", "rating": "4.9", "reviews": 197, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJQfH_WeU7WpMRdrwIrI2DNXg", "place_id": "ChIJQfH_WeU7WpMRdrwIrI2DNXg", "instagram": "Não identificado / Sem site", "reviews_int": 197, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5561992244153?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Maison Odontologia Especializada", "categories": "Clínica odontológica, Periodontia e implantes dentários, Endodontista, Ortodontista", "address": "SGAS 915 Lote 69/70 Sala 41- 2º subsolo Centro Clínico Advance, Brasília - DF, 70390-150", "bairro": "Asa Sul", "city_state": "Brasília - DF", "whatsapp": "(61) 99599-1116", "wa_link": "https://wa.me/5561995991116", "rating": "4.9", "reviews": 186, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJy7c6QCoxWpMRL8X8uUfYim4", "place_id": "ChIJy7c6QCoxWpMRL8X8uUfYim4", "instagram": "Não identificado / Sem site", "reviews_int": 186, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5561995991116?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Dentistas | Clínica Odontológica", "categories": "Dentista", "address": "R. Mal. Deodoro, 370 - Centro, São Bernardo do Campo - SP, 09710-010", "bairro": "Centro", "city_state": "São Bernardo do Campo - SP", "whatsapp": "(11) 96102-2844", "wa_link": "https://wa.me/5511961022844", "rating": "5.0", "reviews": 166, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJd_ARhoRDzpQRfslFd4KQ1VI", "place_id": "ChIJd_ARhoRDzpQRfslFd4KQ1VI", "instagram": "Não identificado / Sem site", "reviews_int": 166, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5511961022844?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Conceitual Clínica Odontológica", "categories": "Clínica odontológica", "address": "Av. Rep. Argentina, 452 - Sl 408 - Água Verde, Curitiba - PR, 80240-210", "bairro": "Água Verde", "city_state": "Curitiba - PR", "whatsapp": "(41) 99990-3331", "wa_link": "https://wa.me/5541999903331", "rating": "4.9", "reviews": 139, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJ59Mb1p7j3JQRx_bqjMNSCDQ", "place_id": "ChIJ59Mb1p7j3JQRx_bqjMNSCDQ", "instagram": "Não identificado / Sem site", "reviews_int": 139, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5541999903331?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Dra. Melina Miranda | Dentista em Ribeirão Preto 24 horas", "categories": "Dentista", "address": "R. Bartolomeu de Gusmão, 707 - Vila Tiberio, Ribeirão Preto - SP, 14050-080", "bairro": "Vila Tiberio", "city_state": "Ribeirão Preto - SP", "whatsapp": "(16) 98146-6276", "wa_link": "https://wa.me/5516981466276", "rating": "5.0", "reviews": 127, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJK59uTAa_uZQR6pHQx14Efxc", "place_id": "ChIJK59uTAa_uZQR6pHQx14Efxc", "instagram": "Não identificado / Sem site", "reviews_int": 127, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5516981466276?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Dra Daniele Taveira | DT Odontologia Integrada", "categories": "Dentista, Clínica odontológica, Periodontia e implantes dentários, Endodontista, Cirurgião dentista, Ortodontista", "address": "R. México, 148 - sala 908 - Centro, Rio de Janeiro - RJ, 20031-142", "bairro": "Centro", "city_state": "Rio de Janeiro - RJ", "whatsapp": "(21) 99109-9201", "wa_link": "https://wa.me/5521991099201", "rating": "4.9", "reviews": 123, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJE-Eu_IJ_mQARXMFHKlg3gSI", "place_id": "ChIJE-Eu_IJ_mQARXMFHKlg3gSI", "instagram": "Não identificado / Sem site", "reviews_int": 123, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5521991099201?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Clínica GC - Odontologia e Estética", "categories": "Clínica odontológica", "address": "Av. Novo Osasco, 54 - Bussocaba, Osasco - SP, 06056-010", "bairro": "Bussocaba", "city_state": "Osasco - SP", "whatsapp": "(11) 97673-1025", "wa_link": "https://wa.me/5511976731025", "rating": "5.0", "reviews": 121, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJechluHJVzpQRAMHNpmobxgg", "place_id": "ChIJechluHJVzpQRAMHNpmobxgg", "instagram": "Não identificado / Sem site", "reviews_int": 121, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5511976731025?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Consultório Odontológico Dr. Thiago Vasconcelos", "categories": "Dentista", "address": "Alameda Pádua, 45 - Pituba, Salvador - BA, 41830-480", "bairro": "Pituba", "city_state": "Salvador - BA", "whatsapp": "(71) 99358-3139", "wa_link": "https://wa.me/5571993583139", "rating": "5.0", "reviews": 119, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJV_gtP1IbFgcR4ntM3iO2BzE", "place_id": "ChIJV_gtP1IbFgcR4ntM3iO2BzE", "instagram": "Não identificado / Sem site", "reviews_int": 119, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5571993583139?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Clinica Odontologica Estrela da Manhã Osasco", "categories": "Clínica odontológica", "address": "Av. Clóvis Assaf, 500 - Conceicao, Osasco - SP, 06145-080", "bairro": "Conceicao", "city_state": "Osasco - SP", "whatsapp": "(11) 99276-9404", "wa_link": "https://wa.me/5511992769404", "rating": "4.6", "reviews": 115, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJ1SwLt7hVzpQR8VL0yxmmEg0", "place_id": "ChIJ1SwLt7hVzpQR8VL0yxmmEg0", "instagram": "Não identificado / Sem site", "reviews_int": 115, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5511992769404?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Dentista Odonto Company Santos Gonzaga", "categories": "Dentista, Dentista cosmético, Periodontia e implantes dentários, Cirurgião dentista", "address": "R. Alagoas, 61 - Gonzaga, Santos - SP, 11065-120", "bairro": "Gonzaga", "city_state": "Santos - SP", "whatsapp": "(13) 98165-4245", "wa_link": "https://wa.me/5513981654245", "rating": "4.8", "reviews": 103, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJ0yfIVrkDzpQRk64ZCK420tw", "place_id": "ChIJ0yfIVrkDzpQRk64ZCK420tw", "instagram": "Não identificado / Sem site", "reviews_int": 103, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5513981654245?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Priore Odontologia", "categories": "Clínica odontológica", "address": "Dentro estacionamento - Avenida Engenheiro Heitor Antônio Eiras García,6455 conj 06, Mercado RodRaf - Jardim Arpoador, São Paulo - SP, 05564-200", "bairro": "Jardim Arpoador", "city_state": "São Paulo - SP", "whatsapp": "(11) 97620-2454", "wa_link": "https://wa.me/5511976202454", "rating": "4.8", "reviews": 96, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJ7VRu6KpVzpQRcRhAVdUhSac", "place_id": "ChIJ7VRu6KpVzpQRcRhAVdUhSac", "instagram": "Não identificado / Sem site", "reviews_int": 96, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5511976202454?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Fácil Odonto- Clínica Odontológica Recife, Pernambuco", "categories": "Clínica odontológica, Dentista", "address": "Edifício Aldja Vasconcelos, Av. Fernando Simões Barbosa, 558 - Boa Viagem, Recife - PE, 51021-060", "bairro": "Boa Viagem", "city_state": "Recife - PE", "whatsapp": "(81) 99466-7997", "wa_link": "https://wa.me/5581994667997", "rating": "4.7", "reviews": 89, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJ8fQr29MfqwcRCt0gS2QoOU4", "place_id": "ChIJ8fQr29MfqwcRCt0gS2QoOU4", "instagram": "Não identificado / Sem site", "reviews_int": 89, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5581994667997?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Odontologia Mundo dos Dentes", "categories": "Dentista, Clínica odontológica, Ortodontista", "address": "R. Padre Juan de Solorzano, 83 - Jardim Paulo VI, São Paulo - SP, 05570-120", "bairro": "Jardim Paulo VI", "city_state": "São Paulo - SP", "whatsapp": "(11) 97894-6017", "wa_link": "https://wa.me/5511978946017", "rating": "4.9", "reviews": 86, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJ67Ij-f1UzpQRQuqXeSZtM5w", "place_id": "ChIJ67Ij-f1UzpQRQuqXeSZtM5w", "instagram": "Não identificado / Sem site", "reviews_int": 86, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5511978946017?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Sorria Goiás Vila Nova", "categories": "Clínica odontológica", "address": "Prç. Ver. Boaventura Moreira de Andrade, QD 27 - LT 15 - St. Leste Vila Nova, Goiânia - GO, 74640-010", "bairro": "Setor Leste Vila Nova", "city_state": "Goiânia - GO", "whatsapp": "(62) 99976-9409", "wa_link": "https://wa.me/5562999769409", "rating": "4.9", "reviews": 84, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJGzlRLZvzXpMR8_b24enPXKE", "place_id": "ChIJGzlRLZvzXpMR8_b24enPXKE", "instagram": "Não identificado / Sem site", "reviews_int": 84, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5562999769409?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Clinica RM Odontologia - Tijuca", "categories": "Clínica odontológica", "address": "Rua Conde de Bonfim, 344 - Sl 703 bloco 01 - Tijuca, Rio de Janeiro - RJ, 20520-054", "bairro": "Tijuca", "city_state": "Rio de Janeiro - RJ", "whatsapp": "(21) 99297-2222", "wa_link": "https://wa.me/5521992972222", "rating": "4.9", "reviews": 83, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJW4-as0B_mQARAxjiWjudl5U", "place_id": "ChIJW4-as0B_mQARAxjiWjudl5U", "instagram": "Não identificado / Sem site", "reviews_int": 83, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5521992972222?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Odontológica", "categories": "Clínica odontológica, Cirurgião dentista", "address": "Avenida São Domingos, R. L-10, Quadra 08 - Res. Fortaleza, Goiânia - GO, 74476-110", "bairro": "Residencial Fortaleza", "city_state": "R. L-10, Quadra 08 - Res. Fortaleza", "whatsapp": "(62) 98325-2618", "wa_link": "https://wa.me/5562983252618", "rating": "5.0", "reviews": 79, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJXyygWkGLXpMR8B4WpHUIEvw", "place_id": "ChIJXyygWkGLXpMR8B4WpHUIEvw", "instagram": "Não identificado / Sem site", "reviews_int": 79, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5562983252618?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Idealys Odontologia Savassi", "categories": "Clínica odontológica, Dentista", "address": "R. Bernardo Guimarães, 856 - Funcionários, Belo Horizonte - MG, 30140-081", "bairro": "Funcionários", "city_state": "Belo Horizonte - MG", "whatsapp": "(31) 99083-5879", "wa_link": "https://wa.me/5531990835879", "rating": "4.7", "reviews": 77, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJq2uHjN-ZpgARB7Ds5QIOWSw", "place_id": "ChIJq2uHjN-ZpgARB7Ds5QIOWSw", "instagram": "Não identificado / Sem site", "reviews_int": 77, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5531990835879?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Dentista 24h Sorocaba | Urgência e Emergência Odontológica Particular", "categories": "Dentista", "address": "Av. Antônio Carlos Comitre, 540 - Sl 96 - Parque Campolim, Sorocaba - SP, 18047-620", "bairro": "Parque Campolim", "city_state": "Sorocaba - SP", "whatsapp": "(15) 99745-8272", "wa_link": "https://wa.me/5515997458272", "rating": "4.9", "reviews": 74, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJM-gz7WyLxZQRo0wdLl6QYYg", "place_id": "ChIJM-gz7WyLxZQRo0wdLl6QYYg", "instagram": "Não identificado / Sem site", "reviews_int": 74, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5515997458272?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Dra Elise Telles Ortodontia Invisalign Flamengo Rio de Janeiro", "categories": "Ortodontista, Dentista cosmético", "address": "Praia do Flamengo, 66 - Bl B, sala 1105 - Flamengo, Rio de Janeiro - RJ, 22210-030", "bairro": "Flamengo", "city_state": "Rio de Janeiro - RJ", "whatsapp": "(21) 99084-9988", "wa_link": "https://wa.me/5521990849988", "rating": "5.0", "reviews": 66, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJKY73psyBmQARMOkNZmJGltc", "place_id": "ChIJKY73psyBmQARMOkNZmJGltc", "instagram": "Não identificado / Sem site", "reviews_int": 66, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5521990849988?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Clínica Guarulhos - RA Odontologia", "categories": "Clínica odontológica", "address": "R. Dom Pedro II, 197 - Centro, Guarulhos - SP, 07010-003", "bairro": "Centro", "city_state": "Guarulhos - SP", "whatsapp": "(11) 95753-0531", "wa_link": "https://wa.me/5511957530531", "rating": "4.9", "reviews": 51, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJqRIbrhT1zpQRVqVGj7V1PfA", "place_id": "ChIJqRIbrhT1zpQRVqVGj7V1PfA", "instagram": "Não identificado / Sem site", "reviews_int": 51, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5511957530531?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "ISO Instituto de Saude Oral", "categories": "Clínica odontológica", "address": "Av. Brasil, 1491 - 406 - Savassi, Belo Horizonte - MG, 30140-002", "bairro": "Savassi", "city_state": "Belo Horizonte - MG", "whatsapp": "(31) 98229-3918", "wa_link": "https://wa.me/5531982293918", "rating": "4.3", "reviews": 51, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJ45NmPuiZpgARnrcPRtpawLg", "place_id": "ChIJ45NmPuiZpgARnrcPRtpawLg", "instagram": "Não identificado / Sem site", "reviews_int": 51, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5531982293918?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Centro Clínico Mais Brasilia", "categories": "Clínica odontológica, Dentista, Ortodontista, Clínica de odontopediatria", "address": "SDS BLOCO H EDIFICIO VENANCIO II - SALA 106 1° ANDAR, SDS, Brasília - DF, 70393-900", "bairro": "Plano Piloto", "city_state": "SDS BLOCO H EDIFICIO VENANCIO II - SA", "whatsapp": "(61) 98241-3121", "wa_link": "https://wa.me/5561982413121", "rating": "4.7", "reviews": 44, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJo3iaR-k7WpMRwQuuAF8etiY", "place_id": "ChIJo3iaR-k7WpMRwQuuAF8etiY", "instagram": "Não identificado / Sem site", "reviews_int": 44, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5561982413121?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "ClinSe Odontologia Integrada - Clínica Odontológica", "categories": "Clínica odontológica, Esteticista, Dentista, Periodontista", "address": "Av. Itamarati, 2800 - Sala 14 - Parque Erasmo Assunção, Santo André - SP, 09271-410", "bairro": "Parque Erasmo Assunção", "city_state": "Santo André - SP", "whatsapp": "(11) 94929-4929", "wa_link": "https://wa.me/5511949294929", "rating": "5.0", "reviews": 42, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJCQfwrvxpzpQRxcHYPPfYVfg", "place_id": "ChIJCQfwrvxpzpQRxcHYPPfYVfg", "instagram": "Não identificado / Sem site", "reviews_int": 42, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5511949294929?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Clínica Dra Camila Nobre", "categories": "Dentista", "address": "R. Abelardo Marinho, 285 - Vila União, Fortaleza - CE, 60411-075", "bairro": "Vila União", "city_state": "Fortaleza - CE", "whatsapp": "(85) 99735-7564", "wa_link": "https://wa.me/5585997357564", "rating": "4.8", "reviews": 36, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJa12K6ndJxwcRheIHW6_kR6M", "place_id": "ChIJa12K6ndJxwcRheIHW6_kR6M", "instagram": "Não identificado / Sem site", "reviews_int": 36, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5585997357564?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "CLÍNICA ODONT", "categories": "Clínica odontológica, Dentista, Cirurgião dentista, Ortodontista", "address": "Rua Grão Mogol, 64 - Carmo Carmo - Sion, Belo Horizonte - MG, 30310-010", "bairro": "Sion", "city_state": "Belo Horizonte - MG", "whatsapp": "(31) 99611-0566", "wa_link": "https://wa.me/5531996110566", "rating": "4.6", "reviews": 34, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJyUCOe8WZpgARvbuME0TMUkw", "place_id": "ChIJyUCOe8WZpgARvbuME0TMUkw", "instagram": "Não identificado / Sem site", "reviews_int": 34, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5531996110566?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "VIDA ODONTOLOGIA E SAÚDE", "categories": "Clínica especializada", "address": "R. Rio Grande do Norte, 1436 - Sl 1212 - Savassi, Belo Horizonte - MG, 30130-131", "bairro": "Savassi", "city_state": "Belo Horizonte - MG", "whatsapp": "(31) 97256-2706", "wa_link": "https://wa.me/5531972562706", "rating": "5.0", "reviews": 33, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJV0IW5JOZpgARAI9YdVsv5h0", "place_id": "ChIJV0IW5JOZpgARAI9YdVsv5h0", "instagram": "Não identificado / Sem site", "reviews_int": 33, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5531972562706?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Dr. Roney Quintela Consultório Odontológico", "categories": "Clínica odontológica", "address": "R. Tomé de Souza, 860 - Sl 1207 - Savassi, Belo Horizonte - MG, 30140-131", "bairro": "Savassi", "city_state": "Belo Horizonte - MG", "whatsapp": "(31) 98896-7577", "wa_link": "https://wa.me/5531988967577", "rating": "5.0", "reviews": 30, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJk4OgPyWZpgARSp_5jl9FQqo", "place_id": "ChIJk4OgPyWZpgARSp_5jl9FQqo", "instagram": "Não identificado / Sem site", "reviews_int": 30, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5531988967577?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Clinica Essenza Odontologia - Santo André | Clinico Geral -Pediatria -Facetas em resina -Exodontia -Canal -Aparelhos", "categories": "Clínica odontológica, Dentista cosmético, Dentista, Serviço dentário de emergência, Endodontista, Cirurgião dentista, Ortodontista, Odontopediatra, Periodontista", "address": "R. Ibiacema, 47 - Vila Floresta, Santo André - SP, 09051-560", "bairro": "Vila Floresta", "city_state": "Santo André - SP", "whatsapp": "(11) 97032-1270", "wa_link": "https://wa.me/5511970321270", "rating": "5.0", "reviews": 28, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJkQDse0FDzpQReihM1z0EwFM", "place_id": "ChIJkQDse0FDzpQReihM1z0EwFM", "instagram": "Não identificado / Sem site", "reviews_int": 28, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5511970321270?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Licos Clínica Odontológica e Equilíbrio Oral", "categories": "Clínica odontológica, Dentista cosmético, Periodontia e implantes dentários, Dentista, Cirurgião dentista, Clínica de odontopediatria", "address": "Av. Anna Costa, 201 - Vila Mathias, Santos - SP, 11060-001", "bairro": "Vila Mathias", "city_state": "Santos - SP", "whatsapp": "(13) 99731-9343", "wa_link": "https://wa.me/5513997319343", "rating": "4.7", "reviews": 28, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJTXu9tnMDzpQRxVKFKjOxZoc", "place_id": "ChIJTXu9tnMDzpQRxVKFKjOxZoc", "instagram": "Não identificado / Sem site", "reviews_int": 28, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5513997319343?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Núcleo de Odontologia", "categories": "Clínica odontológica, Periodontia e implantes dentários, Dentista, Centro de cuidados com dentaduras, Endodontista, Cirurgião dentista, Ortodontista, Laboratório de prótese e órtese, Odontopediatra, Periodontista", "address": "Av. Tancredo Neves, 1632 - Caminho das Árvores, Salvador - BA, 41820-020", "bairro": "Caminho das Árvores", "city_state": "Salvador - BA", "whatsapp": "(71) 98677-9247", "wa_link": "https://wa.me/5571986779247", "rating": "4.9", "reviews": 27, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJXRsqHRAbFgcRUb0Tnl_HIgo", "place_id": "ChIJXRsqHRAbFgcRUb0Tnl_HIgo", "instagram": "Não identificado / Sem site", "reviews_int": 27, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5571986779247?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"name": "Dentista centro de Florianópolis-Dra. Letícia Santos", "categories": "Clínica odontológica", "address": "R. Emílio Blum, 131 - Sl 606 - Centro, Florianópolis - SC, 88020-010", "bairro": "Centro", "city_state": "Florianópolis - SC", "whatsapp": "(48) 97400-4538", "wa_link": "https://wa.me/5548974004538", "rating": "4.8", "reviews": 25, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJC5fOQNw5J5URkSc3CvOmrOs", "place_id": "ChIJC5fOQNw5J5URkSc3CvOmrOs", "instagram": "Não identificado / Sem site", "reviews_int": 25, "mensagem_personalizada": "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.", "wa_link_com_mensagem": "https://wa.me/5548974004538?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Meu%20nome%20%C3%A9%20Leonardo%2C%20quero%20falar%20a%20respeito%20de%20uma%20proposta.", "country": "BR", "country_label": "Brasil", "flag": "🇧🇷", "lang": "pt-BR"}, {"country": "PT", "name": "Clínica Médica e Dentária da Conchada", "categories": "Dentista", "address": "R. Guilherme Gomes Fernandes 3 A-B Lj A, 3000-209 Coimbra, Portugal", "bairro": "3000-209 Coimbra", "city_state": "3000-209 Coimbra, Portugal", "whatsapp": "+351 927 145 457", "wa_link": "https://wa.me/351927145457", "rating": "4.8", "reviews": 131, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJpcS-76T5Ig0Rue1n-iLw-lM", "place_id": "ChIJpcS-76T5Ig0Rue1n-iLw-lM", "instagram": "Não identificado / Sem site", "reviews_int": 131, "mensagem_personalizada": "Olá, viva! O meu nome é Leonardo e gostaria de falar consigo a respeito de uma proposta para a vossa clínica.", "wa_link_com_mensagem": "https://wa.me/351927145457?text=Ol%C3%A1%2C%20viva%21%20O%20meu%20nome%20%C3%A9%20Leonardo%20e%20gostaria%20de%20falar%20consigo%20a%20respeito%20de%20uma%20proposta%20para%20a%20vossa%20cl%C3%ADnica.", "country_label": "Portugal", "flag": "🇵🇹", "lang": "pt-PT"}, {"country": "PT", "name": "Clínica das Rosas", "categories": "Clínica odontológica, Dentista", "address": "R. Maria Victória Bourbon Bobone 15.8 Loja A, 3030-502 Coimbra, Portugal", "bairro": "3030-502 Coimbra", "city_state": "3030-502 Coimbra, Portugal", "whatsapp": "+351 962 714 903", "wa_link": "https://wa.me/351962714903", "rating": "5.0", "reviews": 67, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJVf-CI_35Ig0RwFA_4MhrsbA", "place_id": "ChIJVf-CI_35Ig0RwFA_4MhrsbA", "instagram": "Não identificado / Sem site", "reviews_int": 67, "mensagem_personalizada": "Olá, viva! O meu nome é Leonardo e gostaria de falar consigo a respeito de uma proposta para a vossa clínica.", "wa_link_com_mensagem": "https://wa.me/351962714903?text=Ol%C3%A1%2C%20viva%21%20O%20meu%20nome%20%C3%A9%20Leonardo%20e%20gostaria%20de%20falar%20consigo%20a%20respeito%20de%20uma%20proposta%20para%20a%20vossa%20cl%C3%ADnica.", "country_label": "Portugal", "flag": "🇵🇹", "lang": "pt-PT"}, {"country": "PT", "name": "Smile Concept - Clínica Médica Dentária", "categories": "Clínica odontológica", "address": "Rua da Fé no 55 Lj 2, 2910-053 Setúbal, Portugal", "bairro": "2910-053 Setúbal", "city_state": "2910-053 Setúbal, Portugal", "whatsapp": "+351 936 462 557", "wa_link": "https://wa.me/351936462557", "rating": "4.9", "reviews": 21, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJWTn1w61DGQ0RaE1p24G6t4s", "place_id": "ChIJWTn1w61DGQ0RaE1p24G6t4s", "instagram": "Não identificado / Sem site", "reviews_int": 21, "mensagem_personalizada": "Olá, viva! O meu nome é Leonardo e gostaria de falar consigo a respeito de uma proposta para a vossa clínica.", "wa_link_com_mensagem": "https://wa.me/351936462557?text=Ol%C3%A1%2C%20viva%21%20O%20meu%20nome%20%C3%A9%20Leonardo%20e%20gostaria%20de%20falar%20consigo%20a%20respeito%20de%20uma%20proposta%20para%20a%20vossa%20cl%C3%ADnica.", "country_label": "Portugal", "flag": "🇵🇹", "lang": "pt-PT"}, {"country": "PT", "name": "Clínicas De Medicina Dentária Barnun, Setúbal", "categories": "Clínica odontológica", "address": "Av. Dr. António Rodrigues Manito 65 1º Andar, 2900-067 Setúbal, Portugal", "bairro": "2900-067 Setúbal", "city_state": "2900-067 Setúbal, Portugal", "whatsapp": "+351 935 667 034", "wa_link": "https://wa.me/351935667034", "rating": "4.6", "reviews": 18, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJxSd80bpDGQ0R-Xd12nU9BWw", "place_id": "ChIJxSd80bpDGQ0R-Xd12nU9BWw", "instagram": "Não identificado / Sem site", "reviews_int": 18, "mensagem_personalizada": "Olá, viva! O meu nome é Leonardo e gostaria de falar consigo a respeito de uma proposta para a vossa clínica.", "wa_link_com_mensagem": "https://wa.me/351935667034?text=Ol%C3%A1%2C%20viva%21%20O%20meu%20nome%20%C3%A9%20Leonardo%20e%20gostaria%20de%20falar%20consigo%20a%20respeito%20de%20uma%20proposta%20para%20a%20vossa%20cl%C3%ADnica.", "country_label": "Portugal", "flag": "🇵🇹", "lang": "pt-PT"}, {"country": "PT", "name": "Barros Fernandes - Clínica Médica Lda", "categories": "Clínica odontológica, Policlínica", "address": "Rua dos Comediantes 5A, 2910-468 Setúbal, Portugal", "bairro": "2910-468 Setúbal", "city_state": "2910-468 Setúbal, Portugal", "whatsapp": "+351 918 744 451", "wa_link": "https://wa.me/351918744451", "rating": "4.1", "reviews": 34, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJ4QeuEqpDGQ0RGH8-iQeMl0c", "place_id": "ChIJ4QeuEqpDGQ0RGH8-iQeMl0c", "instagram": "Não identificado / Sem site", "reviews_int": 34, "mensagem_personalizada": "Olá, viva! O meu nome é Leonardo e gostaria de falar consigo a respeito de uma proposta para a vossa clínica.", "wa_link_com_mensagem": "https://wa.me/351918744451?text=Ol%C3%A1%2C%20viva%21%20O%20meu%20nome%20%C3%A9%20Leonardo%20e%20gostaria%20de%20falar%20consigo%20a%20respeito%20de%20uma%20proposta%20para%20a%20vossa%20cl%C3%ADnica.", "country_label": "Portugal", "flag": "🇵🇹", "lang": "pt-PT"}, {"country": "PT", "name": "Centro Médico e Dentário de Faro", "categories": "Clínica odontológica, Dentista, Cirurgião dentista, Clínica especializada", "address": "R. Ataide de Oliveira 119 1ºEsq, 8000-218 Faro, Portugal", "bairro": "8000-218 Faro", "city_state": "8000-218 Faro, Portugal", "whatsapp": "+351 925 769 820", "wa_link": "https://wa.me/351925769820", "rating": "4.8", "reviews": 25, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJhV1QRMNTBQ0R7SV7DPPgUMo", "place_id": "ChIJhV1QRMNTBQ0R7SV7DPPgUMo", "instagram": "Não identificado / Sem site", "reviews_int": 25, "mensagem_personalizada": "Olá, viva! O meu nome é Leonardo e gostaria de falar consigo a respeito de uma proposta para a vossa clínica.", "wa_link_com_mensagem": "https://wa.me/351925769820?text=Ol%C3%A1%2C%20viva%21%20O%20meu%20nome%20%C3%A9%20Leonardo%20e%20gostaria%20de%20falar%20consigo%20a%20respeito%20de%20uma%20proposta%20para%20a%20vossa%20cl%C3%ADnica.", "country_label": "Portugal", "flag": "🇵🇹", "lang": "pt-PT"}, {"country": "PT", "name": "Clínica Dentária da Sé", "categories": "Clínica odontológica, Médico", "address": "R. Reitor Teixeira Guedes nº3 2º andar, 8000-422 Faro, Portugal", "bairro": "8000-422 Faro", "city_state": "8000-422 Faro, Portugal", "whatsapp": "+351 912 571 069", "wa_link": "https://wa.me/351912571069", "rating": "4.9", "reviews": 21, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJhYdtY8RSBQ0RWG5BFGTeD9w", "place_id": "ChIJhYdtY8RSBQ0RWG5BFGTeD9w", "instagram": "Não identificado / Sem site", "reviews_int": 21, "mensagem_personalizada": "Olá, viva! O meu nome é Leonardo e gostaria de falar consigo a respeito de uma proposta para a vossa clínica.", "wa_link_com_mensagem": "https://wa.me/351912571069?text=Ol%C3%A1%2C%20viva%21%20O%20meu%20nome%20%C3%A9%20Leonardo%20e%20gostaria%20de%20falar%20consigo%20a%20respeito%20de%20uma%20proposta%20para%20a%20vossa%20cl%C3%ADnica.", "country_label": "Portugal", "flag": "🇵🇹", "lang": "pt-PT"}, {"country": "PT", "name": "LT SMILE - Clinica Médica e Dentária", "categories": "Clínica odontológica", "address": "R. Jose Pedro de Almeida 12, 8000-504 Faro, Portugal", "bairro": "8000-504 Faro", "city_state": "8000-504 Faro, Portugal", "whatsapp": "+351 963 780 608", "wa_link": "https://wa.me/351963780608", "rating": "5.0", "reviews": 21, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJ1x-Qi-lTBQ0Rj-a0nICbuMk", "place_id": "ChIJ1x-Qi-lTBQ0Rj-a0nICbuMk", "instagram": "Não identificado / Sem site", "reviews_int": 21, "mensagem_personalizada": "Olá, viva! O meu nome é Leonardo e gostaria de falar consigo a respeito de uma proposta para a vossa clínica.", "wa_link_com_mensagem": "https://wa.me/351963780608?text=Ol%C3%A1%2C%20viva%21%20O%20meu%20nome%20%C3%A9%20Leonardo%20e%20gostaria%20de%20falar%20consigo%20a%20respeito%20de%20uma%20proposta%20para%20a%20vossa%20cl%C3%ADnica.", "country_label": "Portugal", "flag": "🇵🇹", "lang": "pt-PT"}, {"country": "PT", "name": "Clínica Médica Dentária Drª. Letícia Campos", "categories": "Clínica odontológica", "address": "R. Monsenhor Henrique Ferreira da Silva 02 Lj. B, 8005-329 Faro, Portugal", "bairro": "8005-329 Faro", "city_state": "8005-329 Faro, Portugal", "whatsapp": "+351 964 243 110", "wa_link": "https://wa.me/351964243110", "rating": "4.4", "reviews": 25, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJe-t0vdFSBQ0RcnD4NQdW0CA", "place_id": "ChIJe-t0vdFSBQ0RcnD4NQdW0CA", "instagram": "Não identificado / Sem site", "reviews_int": 25, "mensagem_personalizada": "Olá, viva! O meu nome é Leonardo e gostaria de falar consigo a respeito de uma proposta para a vossa clínica.", "wa_link_com_mensagem": "https://wa.me/351964243110?text=Ol%C3%A1%2C%20viva%21%20O%20meu%20nome%20%C3%A9%20Leonardo%20e%20gostaria%20de%20falar%20consigo%20a%20respeito%20de%20uma%20proposta%20para%20a%20vossa%20cl%C3%ADnica.", "country_label": "Portugal", "flag": "🇵🇹", "lang": "pt-PT"}, {"country": "PT", "name": "Clínica Bright Sintra", "categories": "Clínica odontológica", "address": "Av. Movimento das Forças Armadas n.º 12 R/C A, Portela de Sintra, 2710-431 Sintra, Portugal", "bairro": "Portela de Sintra", "city_state": "Portela de Sintra, Portugal", "whatsapp": "+351 919 296 758", "wa_link": "https://wa.me/351919296758", "rating": "4.7", "reviews": 3, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJIcdrvNrbHg0RN2sxpvEIKzI", "place_id": "ChIJIcdrvNrbHg0RN2sxpvEIKzI", "instagram": "Não identificado / Sem site", "reviews_int": 3, "mensagem_personalizada": "Olá, viva! O meu nome é Leonardo e gostaria de falar consigo a respeito de uma proposta para a vossa clínica.", "wa_link_com_mensagem": "https://wa.me/351919296758?text=Ol%C3%A1%2C%20viva%21%20O%20meu%20nome%20%C3%A9%20Leonardo%20e%20gostaria%20de%20falar%20consigo%20a%20respeito%20de%20uma%20proposta%20para%20a%20vossa%20cl%C3%ADnica.", "country_label": "Portugal", "flag": "🇵🇹", "lang": "pt-PT"}, {"country": "PT", "name": "Dra. Karínna Sampaio🦷 | Médica Dentista 🇧🇷🇵🇹 URGÊNCIA📍", "categories": "Dentista, Esteticista, Spa facial, Centro de saúde e beleza", "address": "📍Largo Soares dos Reis 100, 4400-309 Vila Nova de Gaia, Portugal", "bairro": "4400-309 Vila Nova de Gaia", "city_state": "4400-309 Vila Nova de Gaia, Portugal", "whatsapp": "+351 934 224 252", "wa_link": "https://wa.me/351934224252", "rating": "5.0", "reviews": 60, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJrVGxB1FlJA0Rpzfjgekjoh0", "place_id": "ChIJrVGxB1FlJA0Rpzfjgekjoh0", "instagram": "Não identificado / Sem site", "reviews_int": 60, "mensagem_personalizada": "Olá, viva! O meu nome é Leonardo e gostaria de falar consigo a respeito de uma proposta para a vossa clínica.", "wa_link_com_mensagem": "https://wa.me/351934224252?text=Ol%C3%A1%2C%20viva%21%20O%20meu%20nome%20%C3%A9%20Leonardo%20e%20gostaria%20de%20falar%20consigo%20a%20respeito%20de%20uma%20proposta%20para%20a%20vossa%20cl%C3%ADnica.", "country_label": "Portugal", "flag": "🇵🇹", "lang": "pt-PT"}, {"country": "PT", "name": "Clínica Dentária Sorriso Marcante - Almada", "categories": "Clínica odontológica", "address": "R. António Gonçalves 5 A, 2810-170 Almada, Portugal", "bairro": "2810-170 Almada", "city_state": "2810-170 Almada, Portugal", "whatsapp": "+351 966 342 486", "wa_link": "https://wa.me/351966342486", "rating": "4.9", "reviews": 163, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJASFIkw01GQ0ROfEQqqu2vF8", "place_id": "ChIJASFIkw01GQ0ROfEQqqu2vF8", "instagram": "Não identificado / Sem site", "reviews_int": 163, "mensagem_personalizada": "Olá, viva! O meu nome é Leonardo e gostaria de falar consigo a respeito de uma proposta para a vossa clínica.", "wa_link_com_mensagem": "https://wa.me/351966342486?text=Ol%C3%A1%2C%20viva%21%20O%20meu%20nome%20%C3%A9%20Leonardo%20e%20gostaria%20de%20falar%20consigo%20a%20respeito%20de%20uma%20proposta%20para%20a%20vossa%20cl%C3%ADnica.", "country_label": "Portugal", "flag": "🇵🇹", "lang": "pt-PT"}, {"country": "PT", "name": "Clínica Dentária Dos Piornais, Lda.", "categories": "Clínica odontológica, Médico, Policlínica", "address": "Estrada Monumental, Edificio Monumental Palace I, 456 M, Ilha Da Madeira, 9000-250 São Martinho, Funchal, Madeira, Portugal", "bairro": "São Martinho", "city_state": "Ilha Da Madeira, Portugal", "whatsapp": "+351 927 032 235", "wa_link": "https://wa.me/351927032235", "rating": "5.0", "reviews": 10, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJH5NmW4VfYAwR3bcM_HxejUU", "place_id": "ChIJH5NmW4VfYAwR3bcM_HxejUU", "instagram": "Não identificado / Sem site", "reviews_int": 10, "mensagem_personalizada": "Olá, viva! O meu nome é Leonardo e gostaria de falar consigo a respeito de uma proposta para a vossa clínica.", "wa_link_com_mensagem": "https://wa.me/351927032235?text=Ol%C3%A1%2C%20viva%21%20O%20meu%20nome%20%C3%A9%20Leonardo%20e%20gostaria%20de%20falar%20consigo%20a%20respeito%20de%20uma%20proposta%20para%20a%20vossa%20cl%C3%ADnica.", "country_label": "Portugal", "flag": "🇵🇹", "lang": "pt-PT"}, {"country": "PT", "name": "Pateodente Clínica de Medicina Dentária - Luís Filipe Correia e Tatiana Abreu - Médicos Dentistas", "categories": "Dentista", "address": "R. do Carmo n29 R/C, 9050-019 Funchal, Portugal", "bairro": "9050-019 Funchal", "city_state": "9050-019 Funchal, Portugal", "whatsapp": "+351 914 088 608", "wa_link": "https://wa.me/351914088608", "rating": "3.8", "reviews": 13, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJR5Z6af9hYAwRgW1FDl1lf3U", "place_id": "ChIJR5Z6af9hYAwRgW1FDl1lf3U", "instagram": "Não identificado / Sem site", "reviews_int": 13, "mensagem_personalizada": "Olá, viva! O meu nome é Leonardo e gostaria de falar consigo a respeito de uma proposta para a vossa clínica.", "wa_link_com_mensagem": "https://wa.me/351914088608?text=Ol%C3%A1%2C%20viva%21%20O%20meu%20nome%20%C3%A9%20Leonardo%20e%20gostaria%20de%20falar%20consigo%20a%20respeito%20de%20uma%20proposta%20para%20a%20vossa%20cl%C3%ADnica.", "country_label": "Portugal", "flag": "🇵🇹", "lang": "pt-PT"}, {"country": "PT", "name": "DBR - Clínica de Medicina Dentária do Barreiro", "categories": "Médico", "address": "Alfredo da Silva, Av. Alfredo da Silva,n.32 C.C, Loja 17-A, 2830-302 Barreiro, Portugal", "bairro": "Barreiro", "city_state": "Barreiro, Portugal", "whatsapp": "+351 969 187 563", "wa_link": "https://wa.me/351969187563", "rating": "4.0", "reviews": 13, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJjfPguKY3GQ0RzF6Do3BI-yY", "place_id": "ChIJjfPguKY3GQ0RzF6Do3BI-yY", "instagram": "Não identificado / Sem site", "reviews_int": 13, "mensagem_personalizada": "Olá, viva! O meu nome é Leonardo e gostaria de falar consigo a respeito de uma proposta para a vossa clínica.", "wa_link_com_mensagem": "https://wa.me/351969187563?text=Ol%C3%A1%2C%20viva%21%20O%20meu%20nome%20%C3%A9%20Leonardo%20e%20gostaria%20de%20falar%20consigo%20a%20respeito%20de%20uma%20proposta%20para%20a%20vossa%20cl%C3%ADnica.", "country_label": "Portugal", "flag": "🇵🇹", "lang": "pt-PT"}, {"country": "PT", "name": "Clínica Médica e Dentária Dra. Susana Oliveira", "categories": "Clínica odontológica", "address": "Rua de Cabo Verde 1, 2830-059 Barreiro, Portugal", "bairro": "Barreiro", "city_state": "Barreiro, Portugal", "whatsapp": "+351 926 790 936", "wa_link": "https://wa.me/351926790936", "rating": "4.5", "reviews": 13, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJl45c_0g2GQ0R9EKkDl6dmYY", "place_id": "ChIJl45c_0g2GQ0R9EKkDl6dmYY", "instagram": "Não identificado / Sem site", "reviews_int": 13, "mensagem_personalizada": "Olá, viva! O meu nome é Leonardo e gostaria de falar consigo a respeito de uma proposta para a vossa clínica.", "wa_link_com_mensagem": "https://wa.me/351926790936?text=Ol%C3%A1%2C%20viva%21%20O%20meu%20nome%20%C3%A9%20Leonardo%20e%20gostaria%20de%20falar%20consigo%20a%20respeito%20de%20uma%20proposta%20para%20a%20vossa%20cl%C3%ADnica.", "country_label": "Portugal", "flag": "🇵🇹", "lang": "pt-PT"}, {"country": "PT", "name": "I.M.D.M. - Instituto Médico Dentário Da Malata, Lda.", "categories": "Clínica odontológica", "address": "URB, R. Prof. Dr. Montalvão Marques 1 L, 8500-720 Portimão, Portugal", "bairro": "Portimão", "city_state": "Portimão, Portugal", "whatsapp": "+351 961 036 727", "wa_link": "https://wa.me/351961036727", "rating": "3.9", "reviews": 53, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJKT52U-woGw0RsVQUWdNMnp4", "place_id": "ChIJKT52U-woGw0RsVQUWdNMnp4", "instagram": "Não identificado / Sem site", "reviews_int": 53, "mensagem_personalizada": "Olá, viva! O meu nome é Leonardo e gostaria de falar consigo a respeito de uma proposta para a vossa clínica.", "wa_link_com_mensagem": "https://wa.me/351961036727?text=Ol%C3%A1%2C%20viva%21%20O%20meu%20nome%20%C3%A9%20Leonardo%20e%20gostaria%20de%20falar%20consigo%20a%20respeito%20de%20uma%20proposta%20para%20a%20vossa%20cl%C3%ADnica.", "country_label": "Portugal", "flag": "🇵🇹", "lang": "pt-PT"}, {"country": "PT", "name": "Telma Dias Clínica De Medicina Dentária", "categories": "Dentista", "address": "R. Dr. Diogo Leote 20, 8200-121 Albufeira, Portugal", "bairro": "Albufeira", "city_state": "Albufeira, Portugal", "whatsapp": "+351 963 727 056", "wa_link": "https://wa.me/351963727056", "rating": "5.0", "reviews": 2, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJQepwAy_MGg0RIMajW31cS5Y", "place_id": "ChIJQepwAy_MGg0RIMajW31cS5Y", "instagram": "Não identificado / Sem site", "reviews_int": 2, "mensagem_personalizada": "Olá, viva! O meu nome é Leonardo e gostaria de falar consigo a respeito de uma proposta para a vossa clínica.", "wa_link_com_mensagem": "https://wa.me/351963727056?text=Ol%C3%A1%2C%20viva%21%20O%20meu%20nome%20%C3%A9%20Leonardo%20e%20gostaria%20de%20falar%20consigo%20a%20respeito%20de%20uma%20proposta%20para%20a%20vossa%20cl%C3%ADnica.", "country_label": "Portugal", "flag": "🇵🇹", "lang": "pt-PT"}, {"country": "PT", "name": "Clínica Médica Dentária Dra. Alexandra Fonseca", "categories": "Clínica odontológica, Periodontia e implantes dentários, Endodontista, Ortodontista, Odontopediatra", "address": "R. Entrevinhas 6 R/C Esq, 3505-545 Viseu, Portugal", "bairro": "Viseu", "city_state": "Viseu, Portugal", "whatsapp": "+351 926 746 823", "wa_link": "https://wa.me/351926746823", "rating": "5.0", "reviews": 14, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJJcOae1o3Iw0RPuTsgvZ_zDE", "place_id": "ChIJJcOae1o3Iw0RPuTsgvZ_zDE", "instagram": "Não identificado / Sem site", "reviews_int": 14, "mensagem_personalizada": "Olá, viva! O meu nome é Leonardo e gostaria de falar consigo a respeito de uma proposta para a vossa clínica.", "wa_link_com_mensagem": "https://wa.me/351926746823?text=Ol%C3%A1%2C%20viva%21%20O%20meu%20nome%20%C3%A9%20Leonardo%20e%20gostaria%20de%20falar%20consigo%20a%20respeito%20de%20uma%20proposta%20para%20a%20vossa%20cl%C3%ADnica.", "country_label": "Portugal", "flag": "🇵🇹", "lang": "pt-PT"}, {"country": "PT", "name": "Albuquerque Medicina Dentária", "categories": "Dentista", "address": "Largo da Estação 6, 2750-471 Cascais, Portugal", "bairro": "Cascais", "city_state": "Cascais, Portugal", "whatsapp": "+351 913 235 423", "wa_link": "https://wa.me/351913235423", "rating": "5.0", "reviews": 8, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJcWZ5Zb3FHg0RmmQ9Z_QyUHA", "place_id": "ChIJcWZ5Zb3FHg0RmmQ9Z_QyUHA", "instagram": "Não identificado / Sem site", "reviews_int": 8, "mensagem_personalizada": "Olá, viva! O meu nome é Leonardo e gostaria de falar consigo a respeito de uma proposta para a vossa clínica.", "wa_link_com_mensagem": "https://wa.me/351913235423?text=Ol%C3%A1%2C%20viva%21%20O%20meu%20nome%20%C3%A9%20Leonardo%20e%20gostaria%20de%20falar%20consigo%20a%20respeito%20de%20uma%20proposta%20para%20a%20vossa%20cl%C3%ADnica.", "country_label": "Portugal", "flag": "🇵🇹", "lang": "pt-PT"}, {"country": "PT", "name": "Clínica Ferreira", "categories": "Dentista", "address": "R. Manuel Lemos Peixoto 14A, 2610-110 Amadora, Portugal", "bairro": "Amadora", "city_state": "Amadora, Portugal", "whatsapp": "+351 935 174 430", "wa_link": "https://wa.me/351935174430", "rating": "5.0", "reviews": 10, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJ-84SV__NHg0Rk5VfEvM7psM", "place_id": "ChIJ-84SV__NHg0Rk5VfEvM7psM", "instagram": "Não identificado / Sem site", "reviews_int": 10, "mensagem_personalizada": "Olá, viva! O meu nome é Leonardo e gostaria de falar consigo a respeito de uma proposta para a vossa clínica.", "wa_link_com_mensagem": "https://wa.me/351935174430?text=Ol%C3%A1%2C%20viva%21%20O%20meu%20nome%20%C3%A9%20Leonardo%20e%20gostaria%20de%20falar%20consigo%20a%20respeito%20de%20uma%20proposta%20para%20a%20vossa%20cl%C3%ADnica.", "country_label": "Portugal", "flag": "🇵🇹", "lang": "pt-PT"}, {"country": "PT", "name": "Clinica médica dentária D.João I", "categories": "Clínica odontológica", "address": "R. Dom João i 214, 4450-162 Matosinhos, Portugal", "bairro": "Matosinhos", "city_state": "Matosinhos, Portugal", "whatsapp": "+351 934 044 226", "wa_link": "https://wa.me/351934044226", "rating": "5.0", "reviews": 58, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJt9ITCwBvJA0R9910iTM-oow", "place_id": "ChIJt9ITCwBvJA0R9910iTM-oow", "instagram": "Não identificado / Sem site", "reviews_int": 58, "mensagem_personalizada": "Olá, viva! O meu nome é Leonardo e gostaria de falar consigo a respeito de uma proposta para a vossa clínica.", "wa_link_com_mensagem": "https://wa.me/351934044226?text=Ol%C3%A1%2C%20viva%21%20O%20meu%20nome%20%C3%A9%20Leonardo%20e%20gostaria%20de%20falar%20consigo%20a%20respeito%20de%20uma%20proposta%20para%20a%20vossa%20cl%C3%ADnica.", "country_label": "Portugal", "flag": "🇵🇹", "lang": "pt-PT"}, {"country": "PT", "name": "My Klinic - Clínica Dentária", "categories": "Clínica odontológica", "address": "Rua de Brito Capelo 708, 4450-068 Matosinhos, Portugal", "bairro": "Matosinhos", "city_state": "Matosinhos, Portugal", "whatsapp": "+351 969 006 799", "wa_link": "https://wa.me/351969006799", "rating": "4.2", "reviews": 79, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJh01SWjpvJA0RJiwuSySu5DY", "place_id": "ChIJh01SWjpvJA0RJiwuSySu5DY", "instagram": "Não identificado / Sem site", "reviews_int": 79, "mensagem_personalizada": "Olá, viva! O meu nome é Leonardo e gostaria de falar consigo a respeito de uma proposta para a vossa clínica.", "wa_link_com_mensagem": "https://wa.me/351969006799?text=Ol%C3%A1%2C%20viva%21%20O%20meu%20nome%20%C3%A9%20Leonardo%20e%20gostaria%20de%20falar%20consigo%20a%20respeito%20de%20uma%20proposta%20para%20a%20vossa%20cl%C3%ADnica.", "country_label": "Portugal", "flag": "🇵🇹", "lang": "pt-PT"}, {"country": "PT", "name": "Centro Português de Medicina Dentária", "categories": "Dentista", "address": "R. Irene Vilar 9, 4450-125 Matosinhos, Portugal", "bairro": "Matosinhos", "city_state": "Matosinhos, Portugal", "whatsapp": "+351 919 199 019", "wa_link": "https://wa.me/351919199019", "rating": "4.5", "reviews": 13, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJGd_0Vd9vJA0R_T0Dxeflrbk", "place_id": "ChIJGd_0Vd9vJA0R_T0Dxeflrbk", "instagram": "Não identificado / Sem site", "reviews_int": 13, "mensagem_personalizada": "Olá, viva! O meu nome é Leonardo e gostaria de falar consigo a respeito de uma proposta para a vossa clínica.", "wa_link_com_mensagem": "https://wa.me/351919199019?text=Ol%C3%A1%2C%20viva%21%20O%20meu%20nome%20%C3%A9%20Leonardo%20e%20gostaria%20de%20falar%20consigo%20a%20respeito%20de%20uma%20proposta%20para%20a%20vossa%20cl%C3%ADnica.", "country_label": "Portugal", "flag": "🇵🇹", "lang": "pt-PT"}, {"country": "PT", "name": "Clínica Dentária Viana Sorriso", "categories": "Clínica odontológica", "address": "Av. Conde Carreira 66 R/C, 4900-343 Viana do Castelo, Portugal", "bairro": "Viana do Castelo", "city_state": "Viana do Castelo, Portugal", "whatsapp": "+351 964 877 932", "wa_link": "https://wa.me/351964877932", "rating": "5.0", "reviews": 13, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJkT38yoO3JQ0RYmTBdU5wPQs", "place_id": "ChIJkT38yoO3JQ0RYmTBdU5wPQs", "instagram": "Não identificado / Sem site", "reviews_int": 13, "mensagem_personalizada": "Olá, viva! O meu nome é Leonardo e gostaria de falar consigo a respeito de uma proposta para a vossa clínica.", "wa_link_com_mensagem": "https://wa.me/351964877932?text=Ol%C3%A1%2C%20viva%21%20O%20meu%20nome%20%C3%A9%20Leonardo%20e%20gostaria%20de%20falar%20consigo%20a%20respeito%20de%20uma%20proposta%20para%20a%20vossa%20cl%C3%ADnica.", "country_label": "Portugal", "flag": "🇵🇹", "lang": "pt-PT"}, {"country": "PT", "name": "Clinica Médica e Dentária de Cardielos", "categories": "Dentista", "address": "EN202 5, 4925-350 Viana do Castelo, Portugal", "bairro": "Viana do Castelo", "city_state": "Viana do Castelo, Portugal", "whatsapp": "+351 918 299 272", "wa_link": "https://wa.me/351918299272", "rating": "4.7", "reviews": 14, "gmaps_url": "https://www.google.com/maps/place/?q=place_id:ChIJRS9ME9GwJQ0RW9iCaBldhNI", "place_id": "ChIJRS9ME9GwJQ0RW9iCaBldhNI", "instagram": "Não identificado / Sem site", "reviews_int": 14, "mensagem_personalizada": "Olá, viva! O meu nome é Leonardo e gostaria de falar consigo a respeito de uma proposta para a vossa clínica.", "wa_link_com_mensagem": "https://wa.me/351918299272?text=Ol%C3%A1%2C%20viva%21%20O%20meu%20nome%20%C3%A9%20Leonardo%20e%20gostaria%20de%20falar%20consigo%20a%20respeito%20de%20uma%20proposta%20para%20a%20vossa%20cl%C3%ADnica.", "country_label": "Portugal", "flag": "🇵🇹", "lang": "pt-PT"}];
 
-    const DEFAULT_MSG_PT = "Olá, viva! O meu nome é Leonardo e gostaria de falar consigo a respeito de uma proposta para a vossa clínica.";
-    const DEFAULT_MSG_BR = "Olá, tudo bem? Meu nome é Leonardo, quero falar a respeito de uma proposta.";
-
     let currentCountry = 'BR'; // 'BR' | 'PT' | 'ALL'
-    let currentLimit = 100;
+    let currentLimit = 15;
     let sentLeads = JSON.parse(localStorage.getItem('sent_odonto_leads') || '[]');
-
-    let customMsgPT = DEFAULT_MSG_PT;
-    let customMsgBR = DEFAULT_MSG_BR;
 
     function saveSentState() {
       localStorage.setItem('sent_odonto_leads', JSON.stringify(sentLeads));
@@ -653,55 +525,19 @@
       renderLeads();
     }
 
-    function onCustomMessageChange(val) {
-      if (currentCountry === 'PT') {
-        customMsgPT = val;
-      } else {
-        customMsgBR = val;
-      }
-      renderLeads();
-    }
-
-    function restoreDefaultMessage() {
-      if (currentCountry === 'PT') {
-        customMsgPT = DEFAULT_MSG_PT;
-        document.getElementById('active-msg-input').value = DEFAULT_MSG_PT;
-      } else {
-        customMsgBR = DEFAULT_MSG_BR;
-        document.getElementById('active-msg-input').value = DEFAULT_MSG_BR;
-      }
-      renderLeads();
-    }
-
     function setCountry(country) {
       currentCountry = country;
-      document.getElementById('btn-country-all').classList.toggle('active', country === 'ALL');
-      document.getElementById('btn-country-br').classList.toggle('active', country === 'BR');
-      document.getElementById('btn-country-pt').classList.toggle('active', country === 'PT');
+      document.getElementById('pill-br').classList.toggle('active', country === 'BR');
+      document.getElementById('pill-pt').classList.toggle('active', country === 'PT');
+      document.getElementById('pill-all').classList.toggle('active', country === 'ALL');
 
-      const headerSubtitle = document.getElementById('header-subtitle');
-      const headerTitle = document.getElementById('header-title');
-      const msgLangBadge = document.getElementById('msg-lang-badge');
-      const activeMsgInput = document.getElementById('active-msg-input');
-
-      if (country === 'PT') {
-        document.documentElement.lang = 'pt-PT';
-        headerTitle.textContent = 'Painel de Leads • Clínicas Dentárias & Médicos Dentistas';
-        headerSubtitle.innerHTML = 'Contactos de consultórios e clínicas dentárias em <strong>Portugal 🇵🇹</strong> com telemóvel WhatsApp direto verificado, sem website e com excelente reputação no Google Maps.';
-        msgLangBadge.innerHTML = '🇵🇹 Português de Portugal (PT-PT)';
-        activeMsgInput.value = customMsgPT;
-      } else if (country === 'BR') {
-        document.documentElement.lang = 'pt-BR';
-        headerTitle.textContent = 'Painel de Leads • Clínicas Odontológicas';
-        headerSubtitle.innerHTML = 'Contatos de consultórios e clínicas odontológicas no <strong>Brasil 🇧🇷</strong> com WhatsApp direto verificado, sem site cadastrado e com alta reputação no Google Maps.';
-        msgLangBadge.innerHTML = '🇧🇷 Português do Brasil (PT-BR)';
-        activeMsgInput.value = customMsgBR;
+      const totalBadge = document.getElementById('total-badge');
+      if (country === 'BR') {
+        totalBadge.textContent = '50';
+      } else if (country === 'PT') {
+        totalBadge.textContent = '26';
       } else {
-        document.documentElement.lang = 'pt';
-        headerTitle.textContent = 'Painel de Leads • Clínicas Odontológicas & Dentárias';
-        headerSubtitle.innerHTML = 'Contatos e contactos de consultórios e clínicas no <strong>Brasil 🇧🇷</strong> e <strong>Portugal 🇵🇹</strong> com WhatsApp direto verificado e sem site cadastrado.';
-        msgLangBadge.innerHTML = '🌐 Modo Internacional (PT-PT & PT-BR)';
-        activeMsgInput.value = customMsgPT;
+        totalBadge.textContent = '76';
       }
 
       renderLeads();
@@ -731,8 +567,7 @@
           l.name.toLowerCase().includes(query) || 
           (l.city_state && l.city_state.toLowerCase().includes(query)) ||
           (l.bairro && l.bairro.toLowerCase().includes(query)) ||
-          (l.whatsapp && l.whatsapp.includes(query)) ||
-          (l.country_label && l.country_label.toLowerCase().includes(query))
+          (l.whatsapp && l.whatsapp.includes(query))
         );
       }
       return list.slice(0, currentLimit);
@@ -743,21 +578,9 @@
       const sentCount = visibleLeads.filter(lead => sentLeads.includes(lead.name)).length;
       document.getElementById('sent-count').textContent = sentCount;
       document.getElementById('pending-count').textContent = visibleLeads.length - sentCount;
-      document.getElementById('total-available').textContent = visibleLeads.length;
     }
 
-    function getLeadEffectiveMessage(lead) {
-      if (lead.country === 'PT') {
-        return customMsgPT;
-      }
-      return customMsgBR;
-    }
-
-    function copyLeadMessage(leadIndex, btn) {
-      const visible = getFilteredLeads();
-      const lead = visible[leadIndex];
-      if (!lead) return;
-      const msg = getLeadEffectiveMessage(lead);
+    function copyLeadMessage(msg, btn) {
       navigator.clipboard.writeText(msg).then(() => {
         const originalText = btn.innerHTML;
         btn.innerHTML = '✅ Copiado!';
@@ -774,7 +597,7 @@
       const list = getFilteredLeads();
 
       if (list.length === 0) {
-        container.innerHTML = '<div style="text-align: center; color: var(--muted); padding: 3rem;">Nenhum estabelecimento encontrado para este filtro.</div>';
+        container.innerHTML = '<div style="text-align: center; color: var(--muted); padding: 3rem;">Nenhum consultório encontrado para esta busca.</div>';
         updateStats();
         return;
       }
@@ -787,38 +610,28 @@
         const safeName = lead.name.replace(/'/g, "\'");
         const isPt = lead.country === 'PT';
         const phoneLabel = isPt ? 'Telemóvel' : 'WhatsApp';
-        const locLabel = isPt ? 'Localização' : 'Localização';
-        const langBadge = isPt ? '🇵🇹 Português de Portugal' : '🇧🇷 Português do Brasil';
-        
-        const effectiveMsg = getLeadEffectiveMessage(lead);
-        const waLinkWithMsg = `${lead.wa_link}?text=${encodeURIComponent(effectiveMsg)}`;
+        const msg = lead.mensagem_personalizada;
+        const waLink = lead.wa_link_com_mensagem || `${lead.wa_link}?text=${encodeURIComponent(msg)}`;
 
         card.innerHTML = `
           <div class="lead-info">
             <div class="lead-header">
               <span class="lead-number">#${String(index + 1).padStart(2, '0')}</span>
-              <span class="country-pill ${isPt ? 'pt' : 'br'}">
-                ${lead.flag || (isPt ? '🇵🇹' : '🇧🇷')} ${lead.country_label || (isPt ? 'Portugal' : 'Brasil')}
-              </span>
               <span class="lead-name">${lead.name}</span>
               <span class="rating-badge">★ ${lead.rating} (${lead.reviews} avaliações)</span>
             </div>
             <div class="lead-details">
-              <div class="detail-item"><strong>${phoneLabel}:</strong> <span class="phone-val">${lead.whatsapp}</span></div>
-              <div class="detail-item"><strong>${locLabel}:</strong> ${lead.bairro ? lead.bairro + ' • ' : ''}${lead.city_state}</div>
+              <div class="detail-item"><strong>${phoneLabel}:</strong> <span style="font-family: 'JetBrains Mono', monospace; color: #38bdf8; font-weight: 700;">${lead.whatsapp}</span></div>
+              <div class="detail-item"><strong>Localização:</strong> ${lead.bairro ? lead.bairro + ' • ' : ''}${lead.city_state}</div>
               <div class="detail-item"><strong>Categorias:</strong> ${lead.categories}</div>
             </div>
-            <div class="msg-box-header">
-              <span>Mensagem de Prospecção</span>
-              <span style="color: var(--accent); font-weight: 700;">${langBadge}</span>
-            </div>
-            <div class="msg-preview">${effectiveMsg}</div>
+            <div class="msg-preview">${msg}</div>
           </div>
           <div class="lead-actions">
-            <a href="${waLinkWithMsg}" target="_blank" class="btn-whatsapp" onclick="if(!sentLeads.includes('${safeName}')) toggleSent('${safeName}')">
+            <a href="${waLink}" target="_blank" class="btn-whatsapp" onclick="if(!sentLeads.includes('${safeName}')) toggleSent('${safeName}')">
               <span>⚡ Abrir WhatsApp</span>
             </a>
-            <button class="btn-copy" onclick="copyLeadMessage(${index}, this)">
+            <button class="btn-copy" onclick="copyLeadMessage('${msg.replace(/'/g, "\'")}', this)">
               📋 Copiar Mensagem
             </button>
             <button class="btn-mark ${isSent ? 'active' : ''}" onclick="toggleSent('${safeName}')">
@@ -833,7 +646,7 @@
       updateStats();
     }
 
-    // Initial render in Brazil mode
+    // Initial render in Brazil mode with Top 15 active
     setCountry('BR');
   </script>
 </body>
