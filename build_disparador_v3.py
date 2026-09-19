@@ -31,6 +31,7 @@ html_template = f"""<!DOCTYPE html>
       --text: #f3f4f6;
       --muted: #94a3b8;
       --success: #10b981;
+      --danger: #ef4444;
     }}
 
     * {{
@@ -202,6 +203,51 @@ html_template = f"""<!DOCTYPE html>
       font-size: 0.925rem;
       color: #e5e7eb;
       line-height: 1.45;
+    }}
+
+    /* Bulk Automation Banner */
+    .bulk-action-bar {{
+      background: linear-gradient(135deg, rgba(37, 211, 102, 0.15) 0%, rgba(14, 165, 233, 0.12) 100%);
+      border: 1px solid rgba(37, 211, 102, 0.35);
+      border-radius: 1.1rem;
+      padding: 1rem 1.5rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }}
+
+    .bulk-action-title {{
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }}
+
+    .btn-bulk-start {{
+      background: var(--whatsapp-green);
+      color: #061e0e;
+      border: none;
+      font-weight: 800;
+      font-size: 1rem;
+      padding: 0.8rem 1.6rem;
+      border-radius: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      box-shadow: 0 4px 18px var(--whatsapp-glow);
+      transition: all 0.2s ease;
+    }}
+
+    .btn-bulk-start:hover {{
+      background: var(--whatsapp-hover);
+      transform: scale(1.03);
     }}
 
     /* Controls Bar */
@@ -434,6 +480,88 @@ html_template = f"""<!DOCTYPE html>
       border-color: rgba(16, 185, 129, 0.4);
     }}
 
+    /* Automation Modal */
+    .modal-backdrop {{
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      padding: 1.5rem;
+    }}
+
+    .modal-backdrop.open {{
+      display: flex;
+    }}
+
+    .modal-box {{
+      background: #0f172a;
+      border: 1px solid rgba(37, 211, 102, 0.4);
+      border-radius: 1.4rem;
+      max-width: 580px;
+      width: 100%;
+      padding: 2rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(37, 211, 102, 0.2);
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }}
+
+    .modal-header {{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }}
+
+    .modal-title {{
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #fff;
+    }}
+
+    .modal-close {{
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }}
+
+    .modal-close:hover {{ color: #fff; }}
+
+    .progress-bar-bg {{
+      width: 100%;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 0.5rem 0;
+    }}
+
+    .progress-bar-fill {{
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #25d366, #38bdf8);
+      border-radius: 999px;
+      transition: width 0.3s ease;
+    }}
+
+    .timer-display {{
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #38bdf8;
+      text-align: center;
+      margin: 0.5rem 0;
+    }}
+
     @media (max-width: 768px) {{
       .lead-card {{
         grid-template-columns: 1fr;
@@ -444,6 +572,11 @@ html_template = f"""<!DOCTYPE html>
       }}
       .btn-whatsapp, .btn-copy, .btn-mark {{
         flex: 1 1 100%;
+      }}
+      .bulk-action-bar {{
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
       }}
     }}
   </style>
@@ -490,6 +623,17 @@ html_template = f"""<!DOCTYPE html>
       </div>
     </div>
 
+    <!-- Botão Principal de Disparo Automático em Sequência -->
+    <div class="bulk-action-bar">
+      <div class="bulk-action-title">
+        <span>⚡ Envio Automático em Sequência</span>
+        <span style="font-size: 0.85rem; color: var(--muted); font-weight: normal;">(Disparo com intervalo inteligente anti-bloqueio)</span>
+      </div>
+      <button class="btn-bulk-start" onclick="openAutoModal()">
+        <span>🚀 Iniciar Disparo Automático</span>
+      </button>
+    </div>
+
     <div class="safety-box">
       <span class="icon">🛡️</span>
       <div>
@@ -512,12 +656,60 @@ html_template = f"""<!DOCTYPE html>
     <div class="leads-list" id="leads-container"></div>
   </div>
 
+  <!-- Modal de Disparo Automático -->
+  <div class="modal-backdrop" id="auto-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title">🚀 Disparo Automático de Mensagens</div>
+        <button class="modal-close" onclick="closeAutoModal()">&times;</button>
+      </div>
+
+      <div style="font-size: 0.95rem; color: #e2e8f0; line-height: 1.45;">
+        O sequenciador enviará automaticamente para os <strong id="modal-leads-count" style="color: #38bdf8;">15</strong> leads da fila atual respeitando o intervalo de segurança configurado.
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.3); padding: 0.75rem 1rem; border-radius: 0.75rem;">
+        <span style="font-size: 0.9rem; color: var(--muted); font-weight: 600;">Intervalo Anti-Bloqueio:</span>
+        <select id="auto-delay-select" style="background: #1e293b; color: #fff; border: 1px solid var(--card-border); padding: 0.4rem 0.8rem; border-radius: 0.5rem; font-weight: 700;">
+          <option value="25">25 segundos</option>
+          <option value="30" selected>30 segundos (Recomendado)</option>
+          <option value="45">45 segundos</option>
+          <option value="60">60 segundos (Ultra Seguro)</option>
+        </select>
+      </div>
+
+      <div style="text-align: center;">
+        <div style="font-size: 0.85rem; color: var(--muted); margin-bottom: 0.25rem;" id="modal-status-text">Status: Pronto para iniciar</div>
+        <div class="timer-display" id="modal-timer">00s</div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="modal-progress-fill"></div>
+        </div>
+        <div style="font-size: 0.8rem; color: #94a3b8;" id="modal-progress-text">Progresso: 0 / 15 enviados</div>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem; margin-top: 0.5rem;">
+        <button id="btn-modal-start" onclick="startAutoQueue()" style="flex: 1; background: var(--whatsapp-green); color: #061e0e; border: none; padding: 0.85rem; border-radius: 0.75rem; font-weight: 800; font-size: 1rem; cursor: pointer;">
+          ▶ Iniciar Disparos
+        </button>
+        <button id="btn-modal-stop" onclick="stopAutoQueue()" disabled style="flex: 1; background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); padding: 0.85rem; border-radius: 0.75rem; font-weight: 800; font-size: 1rem; cursor: pointer;">
+          ⏹ Parar
+        </button>
+      </div>
+    </div>
+  </div>
+
   <script>
     const LEADS_DATA = {json.dumps(all_leads, ensure_ascii=False)};
 
     let currentCountry = 'BR'; // 'BR' | 'PT' | 'ALL'
     let currentLimit = 15;
     let sentLeads = JSON.parse(localStorage.getItem('sent_odonto_leads') || '[]');
+
+    let autoRunning = false;
+    let autoIndex = 0;
+    let autoQueue = [];
+    let autoTimerInterval = null;
+    let currentCountdown = 0;
 
     function saveSentState() {{
       localStorage.setItem('sent_odonto_leads', JSON.stringify(sentLeads));
@@ -655,6 +847,98 @@ html_template = f"""<!DOCTYPE html>
       updateStats();
     }}
 
+    /* Funções do Disparo Automático */
+    function openAutoModal() {{
+      const list = getFilteredLeads();
+      autoQueue = list;
+      document.getElementById('modal-leads-count').textContent = autoQueue.length;
+      document.getElementById('modal-progress-text').textContent = `Progresso: 0 / ${{autoQueue.length}} enviados`;
+      document.getElementById('auto-modal').classList.add('open');
+    }}
+
+    function closeAutoModal() {{
+      if (autoRunning) {{
+        if (!confirm('Deseja cancelar o disparo em andamento?')) return;
+        stopAutoQueue();
+      }}
+      document.getElementById('auto-modal').classList.remove('open');
+    }}
+
+    function startAutoQueue() {{
+      if (autoQueue.length === 0) return;
+      autoRunning = true;
+      autoIndex = 0;
+      document.getElementById('btn-modal-start').disabled = true;
+      document.getElementById('btn-modal-stop').disabled = false;
+      document.getElementById('btn-modal-start').style.opacity = '0.5';
+
+      sendNextInQueue();
+    }}
+
+    function stopAutoQueue() {{
+      autoRunning = false;
+      if (autoTimerInterval) clearInterval(autoTimerInterval);
+      document.getElementById('modal-status-text').textContent = 'Status: Disparos interrompidos.';
+      document.getElementById('modal-timer').textContent = '00s';
+      document.getElementById('btn-modal-start').disabled = false;
+      document.getElementById('btn-modal-stop').disabled = true;
+      document.getElementById('btn-modal-start').style.opacity = '1';
+    }}
+
+    function sendNextInQueue() {{
+      if (!autoRunning) return;
+
+      if (autoIndex >= autoQueue.length) {{
+        document.getElementById('modal-status-text').textContent = '🎉 Todos os envios da fila foram concluídos!';
+        document.getElementById('modal-timer').textContent = 'OK';
+        stopAutoQueue();
+        return;
+      }}
+
+      const lead = autoQueue[autoIndex];
+      const msg = lead.mensagem_personalizada;
+      const waLink = lead.wa_link_com_mensagem || `${{lead.wa_link}}?text=${{encodeURIComponent(msg)}}`;
+
+      document.getElementById('modal-status-text').innerHTML = `Enviando (#${{autoIndex + 1}}/${{autoQueue.length}}): <strong>${{lead.name}}</strong>`;
+      
+      // Abre o WhatsApp para o lead atual
+      window.open(waLink, '_blank');
+
+      if (!sentLeads.includes(lead.name)) {{
+        toggleSent(lead.name);
+      }}
+
+      autoIndex++;
+      const percent = Math.round((autoIndex / autoQueue.length) * 100);
+      document.getElementById('modal-progress-fill').style.width = `${{percent}}%`;
+      document.getElementById('modal-progress-text').textContent = `Progresso: ${{autoIndex}} / ${{autoQueue.length}} enviados (${{percent}}%)`;
+
+      if (autoIndex < autoQueue.length) {{
+        const delaySec = parseInt(document.getElementById('auto-delay-select').value, 10);
+        currentCountdown = delaySec;
+        document.getElementById('modal-timer').textContent = `${{currentCountdown}}s`;
+
+        autoTimerInterval = setInterval(() => {{
+          if (!autoRunning) {{
+            clearInterval(autoTimerInterval);
+            return;
+          }}
+          currentCountdown--;
+          document.getElementById('modal-timer').textContent = `${{currentCountdown}}s`;
+
+          if (currentCountdown <= 0) {{
+            clearInterval(autoTimerInterval);
+            sendNextInQueue();
+          }}
+        }}, 1000);
+      }} else {{
+        setTimeout(() => {{
+          document.getElementById('modal-status-text').textContent = '🎉 Todos os envios foram finalizados com sucesso!';
+          stopAutoQueue();
+        }}, 1500);
+      }}
+    }}
+
     // Initial render in Brazil mode with Top 15 active
     setCountry('BR');
   </script>
@@ -668,4 +952,4 @@ with open("disparador_whatsapp.html", "w", encoding="utf-8") as f:
 with open("index.html", "w", encoding="utf-8") as f:
     f.write(html_template)
 
-print("Layout original do localhost restaurado com perfeição!")
+print("index.html e disparador_whatsapp.html gerados com botão de envio automático!")
