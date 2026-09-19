@@ -11,7 +11,7 @@ html_template = f"""<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Painel de Prospecção • Clínicas Odontológicas</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,6 +40,12 @@ html_template = f"""<!DOCTYPE html>
       padding: 0;
     }}
 
+    html, body {{
+      overflow-x: hidden;
+      width: 100%;
+      max-width: 100vw;
+    }}
+
     body {{
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
       background-color: var(--bg);
@@ -54,6 +60,7 @@ html_template = f"""<!DOCTYPE html>
     .container {{
       max-width: 1100px;
       margin: 0 auto;
+      width: 100%;
     }}
 
     header {{
@@ -101,6 +108,7 @@ html_template = f"""<!DOCTYPE html>
       align-items: center;
       gap: 0.6rem;
       margin-top: 1.5rem;
+      flex-wrap: wrap;
     }}
 
     .country-pill-btn {{
@@ -190,6 +198,7 @@ html_template = f"""<!DOCTYPE html>
 
     .safety-box span.icon {{
       font-size: 2rem;
+      flex-shrink: 0;
     }}
 
     .safety-box h4 {{
@@ -320,6 +329,8 @@ html_template = f"""<!DOCTYPE html>
       grid-template-columns: 1fr auto;
       gap: 1.5rem;
       align-items: center;
+      overflow-wrap: break-word;
+      word-break: break-word;
     }}
 
     .lead-card:hover {{
@@ -336,6 +347,7 @@ html_template = f"""<!DOCTYPE html>
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
+      min-width: 0;
     }}
 
     .lead-header {{
@@ -352,6 +364,7 @@ html_template = f"""<!DOCTYPE html>
       padding: 0.25rem 0.65rem;
       border-radius: 0.5rem;
       color: var(--muted);
+      flex-shrink: 0;
     }}
 
     .lead-name {{
@@ -359,6 +372,7 @@ html_template = f"""<!DOCTYPE html>
       font-size: 1.3rem;
       font-weight: 700;
       color: #ffffff;
+      line-height: 1.3;
     }}
 
     .rating-badge {{
@@ -371,6 +385,7 @@ html_template = f"""<!DOCTYPE html>
       border-radius: 0.5rem;
       font-size: 0.875rem;
       font-weight: 700;
+      flex-shrink: 0;
     }}
 
     .lead-details {{
@@ -487,13 +502,13 @@ html_template = f"""<!DOCTYPE html>
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(0, 0, 0, 0.85);
       backdrop-filter: blur(8px);
       display: none;
       justify-content: center;
       align-items: center;
       z-index: 9999;
-      padding: 1.5rem;
+      padding: 1rem;
     }}
 
     .modal-backdrop.open {{
@@ -562,21 +577,222 @@ html_template = f"""<!DOCTYPE html>
       margin: 0.5rem 0;
     }}
 
+    /* ==========================================================
+       SUPER RESPONSIVE MOBILE OPTIMIZATIONS (Smart Compact View)
+       ========================================================== */
     @media (max-width: 768px) {{
-      .lead-card {{
-        grid-template-columns: 1fr;
+      body {{
+        padding: 1.25rem 0.85rem;
       }}
-      .lead-actions {{
-        flex-direction: row;
-        flex-wrap: wrap;
+
+      header {{
+        margin-bottom: 1.25rem;
       }}
-      .btn-whatsapp, .btn-copy, .btn-mark {{
-        flex: 1 1 100%;
+
+      .badge-user {{
+        font-size: 0.8rem;
+        padding: 0.35rem 0.8rem;
+        margin-bottom: 0.6rem;
       }}
+
+      h1 {{
+        font-size: 1.6rem;
+        margin-bottom: 0.35rem;
+      }}
+
+      p.subtitle {{
+        font-size: 0.875rem;
+        line-height: 1.35;
+      }}
+
+      .country-pills-bar {{
+        gap: 0.4rem;
+        margin-top: 1rem;
+      }}
+
+      .country-pill-btn {{
+        padding: 0.4rem 0.75rem;
+        font-size: 0.8rem;
+        gap: 0.35rem;
+      }}
+
+      /* Super compact horizontal 3-column stats on mobile */
+      .stats-grid {{
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+        margin-bottom: 1.25rem;
+      }}
+
+      .stat-card {{
+        padding: 0.75rem 0.4rem;
+        border-radius: 0.85rem;
+        text-align: center;
+        align-items: center;
+      }}
+
+      .stat-label {{
+        font-size: 0.65rem;
+        letter-spacing: 0.02em;
+        line-height: 1.2;
+      }}
+
+      .stat-value {{
+        font-size: 1.25rem;
+        margin-top: 0.2rem;
+      }}
+
+      /* Bulk Action Banner compact */
       .bulk-action-bar {{
+        padding: 0.85rem 1rem;
+        margin-bottom: 1rem;
         flex-direction: column;
         align-items: stretch;
         text-align: center;
+        gap: 0.6rem;
+      }}
+
+      .bulk-action-title {{
+        font-size: 0.95rem;
+        justify-content: center;
+      }}
+
+      .btn-bulk-start {{
+        width: 100%;
+        justify-content: center;
+        padding: 0.75rem 1rem;
+        font-size: 0.95rem;
+      }}
+
+      /* Compact Safety Box */
+      .safety-box {{
+        padding: 0.85rem 1rem;
+        margin-bottom: 1.2rem;
+        gap: 0.75rem;
+      }}
+
+      .safety-box span.icon {{
+        font-size: 1.5rem;
+      }}
+
+      .safety-box h4 {{
+        font-size: 0.95rem;
+        margin-bottom: 0.15rem;
+      }}
+
+      .safety-box p {{
+        font-size: 0.8rem;
+        line-height: 1.35;
+      }}
+
+      /* Controls & Search */
+      .controls-bar {{
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.65rem;
+        margin-bottom: 1rem;
+      }}
+
+      .tabs {{
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1.3fr 1fr;
+        gap: 0.25rem;
+        padding: 0.3rem;
+      }}
+
+      .tab-btn {{
+        padding: 0.5rem 0.25rem;
+        font-size: 0.75rem;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }}
+
+      .search-input {{
+        width: 100%;
+        min-width: 0;
+        padding: 0.65rem 1rem;
+        font-size: 0.9rem;
+      }}
+
+      /* Super Sleek Lead Cards on Mobile */
+      .leads-list {{
+        gap: 1rem;
+      }}
+
+      .lead-card {{
+        grid-template-columns: 1fr;
+        padding: 1rem;
+        border-radius: 1rem;
+        gap: 0.85rem;
+      }}
+
+      .lead-header {{
+        gap: 0.4rem;
+      }}
+
+      .lead-number {{
+        font-size: 0.75rem;
+        padding: 0.2rem 0.5rem;
+      }}
+
+      .lead-name {{
+        font-size: 1.1rem;
+      }}
+
+      .rating-badge {{
+        font-size: 0.75rem;
+        padding: 0.2rem 0.5rem;
+      }}
+
+      .lead-details {{
+        flex-direction: column;
+        gap: 0.35rem;
+        font-size: 0.825rem;
+      }}
+
+      .msg-preview {{
+        font-size: 0.8rem;
+        padding: 0.65rem 0.85rem;
+        line-height: 1.4;
+        max-height: 80px;
+        margin-top: 0.25rem;
+      }}
+
+      /* 2-Row Action Buttons Grid on Mobile */
+      .lead-actions {{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+        width: 100%;
+        min-width: 0;
+      }}
+
+      .btn-whatsapp {{
+        grid-column: span 2;
+        padding: 0.75rem 1rem;
+        font-size: 0.95rem;
+      }}
+
+      .btn-copy, .btn-mark {{
+        padding: 0.55rem 0.5rem;
+        font-size: 0.8rem;
+        text-align: center;
+        justify-content: center;
+        white-space: nowrap;
+      }}
+
+      /* Modal on Mobile */
+      .modal-box {{
+        padding: 1.25rem;
+        border-radius: 1.1rem;
+        gap: 1rem;
+        max-width: 95vw;
+      }}
+
+      .modal-title {{
+        font-size: 1.15rem;
       }}
     }}
   </style>
@@ -610,15 +826,15 @@ html_template = f"""<!DOCTYPE html>
 
     <div class="stats-grid">
       <div class="stat-card">
-        <span class="stat-label">Meta Diária Segura</span>
-        <span class="stat-value blue" id="meta-count">25 - 30 Envios</span>
+        <span class="stat-label">Meta Segura</span>
+        <span class="stat-value blue" id="meta-count">25 - 30</span>
       </div>
       <div class="stat-card">
-        <span class="stat-label">Mensagens Enviadas</span>
+        <span class="stat-label">Enviadas</span>
         <span class="stat-value green" id="sent-count">0</span>
       </div>
       <div class="stat-card">
-        <span class="stat-label">Pendentes na Fila</span>
+        <span class="stat-label">Pendentes</span>
         <span class="stat-value cyan" id="pending-count">15</span>
       </div>
     </div>
@@ -627,7 +843,7 @@ html_template = f"""<!DOCTYPE html>
     <div class="bulk-action-bar">
       <div class="bulk-action-title">
         <span>⚡ Envio Automático em Sequência</span>
-        <span style="font-size: 0.85rem; color: var(--muted); font-weight: normal;">(Disparo com intervalo inteligente anti-bloqueio)</span>
+        <span style="font-size: 0.825rem; color: var(--muted); font-weight: normal;">(Com cadência anti-bloqueio)</span>
       </div>
       <button class="btn-bulk-start" onclick="openAutoModal()">
         <span>🚀 Iniciar Disparo Automático</span>
@@ -646,8 +862,8 @@ html_template = f"""<!DOCTYPE html>
 
     <div class="controls-bar">
       <div class="tabs">
-        <button class="tab-btn active" onclick="setLimit(15)" id="btn-top15">🎯 Top 15 Mais Populares</button>
-        <button class="tab-btn" onclick="setLimit(30)" id="btn-top30">🔥 Top 30 Recomendados</button>
+        <button class="tab-btn active" onclick="setLimit(15)" id="btn-top15">🎯 Top 15</button>
+        <button class="tab-btn" onclick="setLimit(30)" id="btn-top30">🔥 Top 30</button>
         <button class="tab-btn" onclick="setLimit(100)" id="btn-all">📋 Todos (<span id="total-badge">{len(br_leads)}</span>)</button>
       </div>
       <input type="text" class="search-input" id="search-input" placeholder="🔍 Filtrar por nome ou cidade..." oninput="renderLeads()">
@@ -833,10 +1049,10 @@ html_template = f"""<!DOCTYPE html>
               <span>⚡ Abrir WhatsApp</span>
             </a>
             <button class="btn-copy" onclick="copyLeadMessage('${{msg.replace(/'/g, "\\'")}}', this)">
-              📋 Copiar Mensagem
+              📋 Copiar
             </button>
             <button class="btn-mark ${{isSent ? 'active' : ''}}" onclick="toggleSent('${{safeName}}')">
-              ${{isSent ? '✓ Mensagem Enviada' : 'Marcar como Enviado'}}
+              ${{isSent ? '✓ Enviado' : 'Marcar Enviado'}}
             </button>
           </div>
         `;
@@ -952,4 +1168,4 @@ with open("disparador_whatsapp.html", "w", encoding="utf-8") as f:
 with open("index.html", "w", encoding="utf-8") as f:
     f.write(html_template)
 
-print("index.html e disparador_whatsapp.html gerados com botão de envio automático!")
+print("Dashboard mobile otimizado com sucesso!")
