@@ -852,4 +852,7 @@ html_content = f"""<!DOCTYPE html>
 with open("disparador_whatsapp.html", "w", encoding="utf-8") as f:
     f.write(html_content)
 
-print("disparador_whatsapp.html reconstruído com troca 100% dinâmica de mensagens PT-PT e PT-BR!")
+with open("index.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print("disparador_whatsapp.html e index.html gerados com sucesso!")
