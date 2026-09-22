@@ -341,10 +341,27 @@ html_template = """<!DOCTYPE html>
 
     .nav-btn.qr-btn {
       background: linear-gradient(135deg, #10b981, #059669);
-      color: #022c22;
+      color: #ffffff;
       font-weight: 800;
-      border: none;
+      border: 1px solid rgba(16, 185, 129, 0.4);
       box-shadow: 0 0 18px rgba(16, 185, 129, 0.35);
+    }
+
+    .nav-btn.qr-btn.is-connected {
+      background: linear-gradient(135deg, #059669, #047857) !important;
+      border: 1px solid #10b981 !important;
+      box-shadow: 0 0 22px rgba(16, 185, 129, 0.6) !important;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        box-shadow: 0 0 25px rgba(37, 211, 102, 0.35);
+        transform: scale(1);
+      }
+      50% {
+        box-shadow: 0 0 45px rgba(37, 211, 102, 0.7);
+        transform: scale(1.05);
+      }
     }
 
     .nav-btn.primary {
@@ -1198,8 +1215,8 @@ html_template = """<!DOCTYPE html>
 
     <div class="nav-actions">
       <!-- Dedicated QR Code Button -->
-      <button class="nav-btn qr-btn" onclick="openQrModal()">
-        <span>📲 Conectar WhatsApp (QR Code)</span>
+      <button class="nav-btn qr-btn" id="top-nav-qr-btn" onclick="openQrModal()">
+        <span id="top-nav-qr-text">📲 Conectar WhatsApp (QR Code)</span>
       </button>
       <button class="nav-btn primary" onclick="openGmapsSearchModal()">
         <span>🔍 Buscar no Google Maps</span>
@@ -1228,8 +1245,8 @@ html_template = """<!DOCTYPE html>
           <span style="font-size: 0.75rem; color: var(--muted); text-transform: uppercase; font-weight: 800;">Sessão WhatsApp</span>
           <span class="wa-status-badge" id="wa-connection-badge">🔴 Não Conectado</span>
         </div>
-        <button class="btn-connect-qr" onclick="openQrModal()">
-          <span>📲 Escanear QR Code</span>
+        <button class="btn-connect-qr" id="sidebar-qr-btn" onclick="openQrModal()">
+          <span id="sidebar-qr-text">📲 Escanear QR Code</span>
         </button>
       </div>
 
@@ -1377,42 +1394,82 @@ html_template = """<!DOCTYPE html>
   <div class="modal-overlay" id="modal-qr">
     <div class="modal-card" style="max-width: 480px; text-align: center;">
       <div class="modal-head">
-        <h3>📲 Conectar WhatsApp</h3>
+        <h3 id="qr-modal-head-title">📲 Conectar WhatsApp</h3>
         <button class="btn-close-modal" onclick="closeQrModal()">&times;</button>
       </div>
 
-      <div style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.45;">
-        Conecte seu WhatsApp para que o robô envie as mensagens automaticamente. A sessão fica <strong>salva no seu computador</strong> para sempre!
-      </div>
-
-      <!-- Dynamic QR Code Container -->
-      <div style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.08); border-radius: 1.25rem; padding: 1.25rem; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 280px; gap: 0.85rem;">
-        
-        <div id="qr-loading-spinner" style="display: flex; flex-direction: column; align-items: center; gap: 0.75rem;">
-          <div class="radar-pulse" style="width: 24px; height: 24px; background: #25d366;"></div>
-          <span style="font-size: 0.85rem; color: #94a3b8; font-weight: 700;">Gerando QR Code no WhatsApp Web...</span>
+      <!-- VIEW 1: UNCONNECTED / SCANNING QR CODE -->
+      <div id="qr-unconnected-view" style="display: flex; flex-direction: column; gap: 1rem;">
+        <div style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.45;">
+          Conecte seu WhatsApp para que o robô envie as mensagens automaticamente. A sessão fica <strong>salva no seu computador</strong> para sempre!
         </div>
 
-        <img id="live-qr-img" style="display: none; width: 230px; height: 230px; border-radius: 0.75rem; background: #fff; padding: 8px; box-shadow: 0 8px 25px rgba(0,0,0,0.5);" alt="QR Code WhatsApp">
+        <!-- Dynamic QR Code Container -->
+        <div style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.08); border-radius: 1.25rem; padding: 1.25rem; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 280px; gap: 0.85rem;">
+          
+          <div id="qr-loading-spinner" style="display: flex; flex-direction: column; align-items: center; gap: 0.75rem;">
+            <div class="radar-pulse" style="width: 24px; height: 24px; background: #25d366;"></div>
+            <span style="font-size: 0.85rem; color: #94a3b8; font-weight: 700;">Iniciando navegador e gerando QR Code...</span>
+          </div>
 
-        <div id="qr-success-badge" style="display: none; flex-direction: column; align-items: center; gap: 0.5rem;">
-          <div style="font-size: 3rem;">✅</div>
-          <div style="font-family: 'Outfit'; font-size: 1.2rem; font-weight: 800; color: #4ade80;">WhatsApp Conectado!</div>
-          <div style="font-size: 0.8rem; color: var(--muted);">O robô já tem acesso e está pronto para disparar.</div>
+          <img id="live-qr-img" style="display: none; width: 230px; height: 230px; border-radius: 0.75rem; background: #fff; padding: 8px; box-shadow: 0 8px 25px rgba(0,0,0,0.5);" alt="QR Code WhatsApp">
+        </div>
+
+        <!-- Step Instructions -->
+        <div style="background: rgba(15, 23, 42, 0.7); border-radius: 0.85rem; padding: 0.85rem; text-align: left; font-size: 0.775rem; color: #cbd5e1; line-height: 1.5;">
+          <strong>Como escanear:</strong><br>
+          1. Abra o WhatsApp no seu celular<br>
+          2. Toque em <strong>Configurações / 3 pontinhos</strong> > <strong>Aparelhos Conectados</strong><br>
+          3. Toque em <strong>Conectar um aparelho</strong> e aponte a câmera para o QR Code acima.
+        </div>
+
+        <button class="nav-btn primary" onclick="forceRefreshQr()" style="width: 100%; justify-content: center; padding: 0.75rem;">
+          <span>🔄 Atualizar / Gerar Novo QR Code</span>
+        </button>
+      </div>
+
+      <!-- VIEW 2: ALREADY CONNECTED / READY TO USE -->
+      <div id="qr-connected-view" style="display: none; flex-direction: column; gap: 1.2rem; align-items: center; padding: 0.75rem 0;">
+        <div style="width: 76px; height: 76px; border-radius: 50%; background: linear-gradient(135deg, rgba(37,211,102,0.25), rgba(37,211,102,0.5)); border: 2px solid #25d366; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; box-shadow: 0 0 30px rgba(37,211,102,0.45); animation: pulseGlow 2.5s infinite ease-in-out;">
+          ✅
+        </div>
+
+        <div>
+          <h4 style="font-family: 'Outfit'; font-size: 1.3rem; font-weight: 800; color: #4ade80; margin-bottom: 0.35rem;">WhatsApp Conectado com Sucesso!</h4>
+          <p style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.5; max-width: 380px; margin: 0 auto;">
+            Sua conta está autenticada e salva localmente. Você já pode disparar para os leads normalmente!
+          </p>
+        </div>
+
+        <!-- Status Highlights -->
+        <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(37, 211, 102, 0.25); border-radius: 1rem; padding: 0.9rem 1.1rem; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; text-align: left;">
+          <div style="display: flex; flex-direction: column; gap: 0.2rem;">
+            <span style="font-size: 0.7rem; color: var(--muted); text-transform: uppercase; font-weight: 800;">Status do Robô</span>
+            <span style="font-size: 0.85rem; font-weight: 700; color: #4ade80; display: flex; align-items: center; gap: 0.35rem;">
+              <span class="radar-pulse" style="width: 8px; height: 8px; background: #25d366;"></span> Pronto p/ Enviar
+            </span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 0.2rem;">
+            <span style="font-size: 0.7rem; color: var(--muted); text-transform: uppercase; font-weight: 800;">Sessão Salva</span>
+            <span style="font-size: 0.85rem; font-weight: 700; color: #38bdf8;">💾 Persistente no PC</span>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div style="display: flex; flex-direction: column; gap: 0.6rem; width: 100%;">
+          <button class="nav-btn primary" onclick="closeQrModal(); openAutoModal();" style="width: 100%; justify-content: center; padding: 0.85rem; font-size: 0.95rem; font-weight: 800;">
+            <span>🚀 Iniciar Disparo 100% Automático</span>
+          </button>
+          <div style="display: flex; gap: 0.5rem;">
+            <button class="nav-btn" onclick="closeQrModal()" style="flex: 1; justify-content: center; padding: 0.65rem;">
+              <span>Fechar</span>
+            </button>
+            <button class="nav-btn" onclick="forceRefreshQr()" style="background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.3); color: #fca5a5; font-size: 0.78rem; padding: 0.65rem;" title="Clique para desconectar e escanear novo WhatsApp">
+              <span>🔄 Trocar WhatsApp</span>
+            </button>
+          </div>
         </div>
       </div>
-
-      <!-- Step Instructions -->
-      <div style="background: rgba(15, 23, 42, 0.7); border-radius: 0.85rem; padding: 0.85rem; text-align: left; font-size: 0.775rem; color: #cbd5e1; line-height: 1.5;">
-        <strong>Como escanear:</strong><br>
-        1. Abra o WhatsApp no seu celular<br>
-        2. Toque em <strong>Configurações / 3 pontinhos</strong> > <strong>Aparelhos Conectados</strong><br>
-        3. Toque em <strong>Conectar um aparelho</strong> e aponte a câmera para o QR Code acima.
-      </div>
-
-      <button class="nav-btn primary" onclick="triggerConnectWhatsApp()" style="width: 100%; justify-content: center; padding: 0.75rem;">
-        <span>🔄 Atualizar QR Code</span>
-      </button>
     </div>
   </div>
 
@@ -1682,23 +1739,93 @@ html_template = """<!DOCTYPE html>
     }
 
     // QR CODE MODAL & LIVE CONNECTION
+    let isWhatsAppConnected = false;
+
+    function setWhatsAppConnectedState(connected) {
+      isWhatsAppConnected = !!connected;
+      const topNavBtn = document.getElementById('top-nav-qr-btn');
+      const topNavText = document.getElementById('top-nav-qr-text');
+      const sidebarBadge = document.getElementById('wa-connection-badge');
+      const sidebarText = document.getElementById('sidebar-qr-text');
+      const sidebarBtn = document.getElementById('sidebar-qr-btn');
+      const unconnectedView = document.getElementById('qr-unconnected-view');
+      const connectedView = document.getElementById('qr-connected-view');
+      const modalHeadTitle = document.getElementById('qr-modal-head-title');
+
+      if (connected) {
+        if (topNavText) topNavText.innerHTML = '🟢 WhatsApp Conectado';
+        if (topNavBtn) {
+          topNavBtn.classList.add('is-connected');
+          topNavBtn.style.background = 'linear-gradient(135deg, #059669, #047857)';
+          topNavBtn.style.color = '#ffffff';
+          topNavBtn.style.boxShadow = '0 0 20px rgba(16, 185, 129, 0.5)';
+        }
+        if (sidebarBadge) {
+          sidebarBadge.innerHTML = '🟢 Conectado';
+          sidebarBadge.style.color = '#4ade80';
+        }
+        if (sidebarText) sidebarText.innerHTML = '✅ WhatsApp Conectado';
+        if (sidebarBtn) {
+          sidebarBtn.style.background = 'linear-gradient(135deg, #059669, #047857)';
+          sidebarBtn.style.color = '#ffffff';
+        }
+        if (unconnectedView) unconnectedView.style.display = 'none';
+        if (connectedView) connectedView.style.display = 'flex';
+        if (modalHeadTitle) modalHeadTitle.innerHTML = '✅ WhatsApp Conectado';
+      } else {
+        if (topNavText) topNavText.innerHTML = '📲 Conectar WhatsApp (QR Code)';
+        if (topNavBtn) {
+          topNavBtn.classList.remove('is-connected');
+          topNavBtn.style.background = '';
+          topNavBtn.style.color = '';
+          topNavBtn.style.boxShadow = '';
+        }
+        if (sidebarBadge) {
+          sidebarBadge.innerHTML = '🔴 Não Conectado';
+          sidebarBadge.style.color = '#f87171';
+        }
+        if (sidebarText) sidebarText.innerHTML = '📲 Escanear QR Code';
+        if (sidebarBtn) {
+          sidebarBtn.style.background = '';
+          sidebarBtn.style.color = '';
+        }
+        if (unconnectedView) unconnectedView.style.display = 'flex';
+        if (connectedView) connectedView.style.display = 'none';
+        if (modalHeadTitle) modalHeadTitle.innerHTML = '📲 Conectar WhatsApp';
+      }
+    }
+
     function openQrModal() {
       document.getElementById('modal-qr').classList.add('active');
-      triggerConnectWhatsApp();
+      if (isWhatsAppConnected) {
+        setWhatsAppConnectedState(true);
+      } else {
+        triggerConnectWhatsApp();
+      }
     }
 
     function closeQrModal() {
       document.getElementById('modal-qr').classList.remove('active');
     }
 
+    function forceRefreshQr() {
+      setWhatsAppConnectedState(false);
+      triggerConnectWhatsApp();
+    }
+
     async function triggerConnectWhatsApp() {
       const spinner = document.getElementById('qr-loading-spinner');
       const qrImg = document.getElementById('live-qr-img');
-      const successBadge = document.getElementById('qr-success-badge');
+      const unconnectedView = document.getElementById('qr-unconnected-view');
+      const connectedView = document.getElementById('qr-connected-view');
 
-      spinner.style.display = 'flex';
-      qrImg.style.display = 'none';
-      successBadge.style.display = 'none';
+      if (unconnectedView) unconnectedView.style.display = 'flex';
+      if (connectedView) connectedView.style.display = 'none';
+      if (spinner) {
+        spinner.style.display = 'flex';
+        spinner.innerHTML = '<div class="radar-pulse" style="width: 24px; height: 24px; background: #25d366;"></div><span style="font-size: 0.85rem; color: #94a3b8; font-weight: 700;">Iniciando navegador e gerando QR Code...</span>';
+      }
+      if (qrImg) qrImg.style.display = 'none';
 
       try {
         await fetch(`${API_BASE}/api/connect_whatsapp`, { method: 'POST' });
@@ -1712,25 +1839,24 @@ html_template = """<!DOCTYPE html>
             const data = await res.json();
 
             if (data.is_connected) {
-              spinner.style.display = 'none';
-              qrImg.style.display = 'none';
-              successBadge.style.display = 'flex';
-              document.getElementById('wa-connection-badge').textContent = '🟢 Conectado';
-              document.getElementById('wa-connection-badge').style.color = '#4ade80';
               clearInterval(qrPollingInterval);
+              setWhatsAppConnectedState(true);
               showToast('✅ WhatsApp Conectado com Sucesso!');
             } else if (data.qr_image) {
-              spinner.style.display = 'none';
-              successBadge.style.display = 'none';
-              qrImg.src = data.qr_image;
-              qrImg.style.display = 'block';
+              if (spinner) spinner.style.display = 'none';
+              if (qrImg) {
+                qrImg.src = data.qr_image;
+                qrImg.style.display = 'block';
+              }
             }
           } catch (e) {}
-        }, 1200);
+        }, 1000);
 
       } catch (err) {
         console.error('Erro ao conectar', err);
-        spinner.innerHTML = '<span style="color: #f87171;">Não foi possível conectar ao servidor do robô.</span>';
+        if (spinner) {
+          spinner.innerHTML = '<span style="color: #f87171; font-weight: 700;">Não foi possível conectar ao servidor do robô.<br><small style="color: #94a3b8;">Certifique-se de que o servidor Python está rodando (iniciar_robo.bat).</small></span>';
+        }
       }
     }
 
@@ -1741,8 +1867,9 @@ html_template = """<!DOCTYPE html>
         if (res.ok) {
           const data = await res.json();
           if (data.is_connected) {
-            document.getElementById('wa-connection-badge').textContent = '🟢 Conectado';
-            document.getElementById('wa-connection-badge').style.color = '#4ade80';
+            setWhatsAppConnectedState(true);
+          } else {
+            setWhatsAppConnectedState(false);
           }
         }
       } catch (e) {}
@@ -2368,6 +2495,7 @@ html_template = """<!DOCTYPE html>
     loadSavedState();
     initNiche(currentNicheId);
     checkRobotHealth();
+    setInterval(checkRobotHealth, 3000);
   </script>
 </body>
 </html>

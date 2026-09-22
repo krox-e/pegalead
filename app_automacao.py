@@ -144,19 +144,37 @@ def qr_monitor_loop():
         if "web.whatsapp.com" not in page.url:
             page.goto("https://web.whatsapp.com", timeout=60000)
 
-        for _ in range(120): # 4 minutes max
+        logged_in_selectors = [
+            '#pane-side',
+            '#side',
+            'div[data-testid="chat-list"]',
+            'div[aria-label="Lista de conversas"]',
+            'div[aria-label="Chat list"]',
+            'div[contenteditable="true"][data-tab="3"]',
+            'div[contenteditable="true"]',
+            'span[data-icon="chat"]',
+            'span[data-icon="chats"]',
+            'span[data-icon="community"]',
+            'span[data-icon="status-v3"]',
+            'div[data-testid="intro-title"]',
+            'h1[data-testid="intro-title"]',
+            'header'
+        ]
+
+        for _ in range(150): # 5 minutes max
             if STOP_EVENT.is_set():
                 break
 
             # 1. Check if already logged in (chats loaded)
             try:
-                if page.locator('div[contenteditable="true"], div[data-tab="3"], #side, header, span[data-icon="chat"]').first.is_visible():
-                    with STATE_LOCK:
-                        STATE["is_connected"] = True
-                        STATE["status"] = "connected"
-                        STATE["qr_image"] = None
-                    add_log("✅ WhatsApp Conectado e Autenticado com Sucesso!", level="success")
-                    return
+                for sel in logged_in_selectors:
+                    if page.locator(sel).first.is_visible():
+                        with STATE_LOCK:
+                            STATE["is_connected"] = True
+                            STATE["status"] = "connected"
+                            STATE["qr_image"] = None
+                        add_log("✅ WhatsApp Conectado e Autenticado com Sucesso!", level="success")
+                        return
             except Exception:
                 pass
 
@@ -183,7 +201,7 @@ def qr_monitor_loop():
             except Exception:
                 pass
 
-            time.sleep(1.2)
+            time.sleep(1.0)
 
     except Exception as e:
         add_log(f"Erro na conexão do WhatsApp: {e}", level="error")
