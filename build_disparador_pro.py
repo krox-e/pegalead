@@ -1648,9 +1648,10 @@ html_template = """<!DOCTYPE html>
     const ALL_NICHES = __NICHES_DATA__;
 
     // Backend API Base (FastAPI Robot Server)
-    const API_BASE = window.location.origin.includes('http') && !window.location.origin.startsWith('file:') 
-      ? window.location.origin 
-      : 'http://127.0.0.1:5000';
+    let API_BASE = 'http://127.0.0.1:5000';
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      API_BASE = window.location.origin;
+    }
 
     // State Variables
     let currentNicheId = 'odonto_br';
@@ -1664,58 +1665,74 @@ html_template = """<!DOCTYPE html>
     let robotPollingInterval = null;
     let lastSentLeadId = null;
     let qrPollingInterval = null;
+    let qrAttemptCount = 0;
 
     // Load from localStorage on boot
     function loadSavedState() {
       try {
-        const savedHistory = localStorage.getItem('pega_sent_history');
-        if (savedHistory) sentHistory = JSON.parse(savedHistory);
+        const savedNiche = localStorage.getItem('pegalead_niche');
+        if (savedNiche && ALL_NICHES[savedNiche]) currentNicheId = savedNiche;
         
-        const savedReplenish = localStorage.getItem('pega_auto_replenish');
-        if (savedReplenish !== null) {
-          autoReplenishEnabled = savedReplenish === 'true';
-          document.getElementById('auto-replenish-toggle').checked = autoReplenishEnabled;
-        }
+        const savedLimit = localStorage.getItem('pegalead_limit');
+        if (savedLimit) currentLimit = parseInt(savedLimit);
 
-        const savedKey = localStorage.getItem('pega_gmaps_key');
-        if (savedKey) {
-          document.getElementById('gmaps-api-key-input').value = savedKey;
-        }
-      } catch (e) {
-        console.error('Erro ao ler localStorage', e);
-      }
+        const savedReplenish = localStorage.getItem('pegalead_replenish');
+        if (savedReplenish !== null) autoReplenishEnabled = (savedReplenish === 'true');
+
+        const savedHist = localStorage.getItem('pegalead_history');
+        if (savedHist) sentHistory = JSON.parse(savedHist);
+      } catch (e) {}
     }
 
     function saveState() {
       try {
-        localStorage.setItem('pega_sent_history', JSON.stringify(sentHistory));
-        localStorage.setItem('pega_auto_replenish', autoReplenishEnabled ? 'true' : 'false');
+        localStorage.setItem('pegalead_niche', currentNicheId);
+        localStorage.setItem('pegalead_limit', currentLimit);
+        localStorage.setItem('pegalead_replenish', autoReplenishEnabled);
+        localStorage.setItem('pegalead_history', JSON.stringify(sentHistory));
       } catch (e) {}
     }
 
-    // Initialize Active Niche and Queue
-    function initNiche(nicheId) {
-      currentNicheId = nicheId;
-      const niche = ALL_NICHES[nicheId];
-      if (!niche) return;
-
-      const sentNames = new Set(sentHistory.map(h => h.name));
-      currentPool = [...niche.leads];
-      
-      const unsent = currentPool.filter(l => !sentNames.has(l.name));
-      activeQueue = unsent.slice(0, currentLimit);
-
-      document.getElementById('active-niche-title').textContent = niche.name;
-      document.getElementById('active-niche-subtitle').textContent = `Local: ${niche.city} • Base Google Maps: ${niche.leads.length} leads`;
-      document.getElementById('radar-query-text').textContent = `Mapeando ${niche.name.replace(/[🇧🇷🇵🇹]/g, '').trim()} em ${niche.city}`;
-      
-      updateAllStats();
-      renderLeadsFeed();
+    // Tab Pills & Limits
+    function initTabs() {
+      const tabsRow = document.getElementById('niche-tabs-row');
+      tabsRow.innerHTML = '';
+      Object.keys(ALL_NICHES).forEach(nicheKey => {
+        const n = ALL_NICHES[nicheKey];
+        const btn = document.createElement('button');
+        btn.className = `tab-pill ${nicheKey === currentNicheId ? 'active' : ''}`;
+        btn.id = `tab-${nicheKey}`;
+        btn.onclick = () => switchNiche(nicheKey);
+        btn.innerHTML = `<span>${n.icon}</span><span>${n.title}</span>`;
+        tabsRow.appendChild(btn);
+      });
     }
 
     function switchNiche(nicheId) {
+      currentNicheId = nicheId;
       initNiche(nicheId);
-      showToast(`📍 Nicho alterado: ${ALL_NICHES[nicheId].name}`);
+      saveState();
+      showToast(`🎯 Nicho alterado: ${ALL_NICHES[nicheId].title}`);
+    }
+
+    function initNiche(nicheId) {
+      const niche = ALL_NICHES[nicheId];
+      if (!niche) return;
+
+      currentPool = [...niche.leads];
+      const sentNames = new Set(sentHistory.map(h => h.name));
+      const unsent = currentPool.filter(l => !sentNames.has(l.name));
+      activeQueue = unsent.slice(0, currentLimit);
+
+      document.querySelectorAll('.tab-pill').forEach(btn => btn.classList.remove('active'));
+      const activeTab = document.getElementById(`tab-${nicheId}`);
+      if (activeTab) activeTab.classList.add('active');
+
+      document.getElementById('radar-query-text').textContent = `Minerando ${niche.title} com reposição contínua.`;
+
+      initTabs();
+      updateAllStats();
+      renderLeadsFeed();
     }
 
     function setQueueLimit(limit) {
@@ -1823,19 +1840,48 @@ html_template = """<!DOCTYPE html>
       if (connectedView) connectedView.style.display = 'none';
       if (spinner) {
         spinner.style.display = 'flex';
-        spinner.innerHTML = '<div class="radar-pulse" style="width: 24px; height: 24px; background: #25d366;"></div><span style="font-size: 0.85rem; color: #94a3b8; font-weight: 700;">Iniciando navegador e gerando QR Code...</span>';
+        spinner.innerHTML = '<div class="radar-pulse" style="width: 24px; height: 24px; background: #25d366;"></div><span style="font-size: 0.85rem; color: #94a3b8; font-weight: 700;">Gerando QR Code ao vivo no WhatsApp...</span>';
       }
       if (qrImg) qrImg.style.display = 'none';
 
+      qrAttemptCount = 0;
+
+      const notifyServerError = () => {
+        if (spinner) {
+          spinner.innerHTML = `
+            <div style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 0.85rem; padding: 1rem; text-align: center; max-width: 380px;">
+              <div style="font-size: 1.5rem; margin-bottom: 0.3rem;">⚠️</div>
+              <div style="font-weight: 800; color: #f87171; font-size: 0.95rem; margin-bottom: 0.35rem;">Servidor do Robô Desconectado</div>
+              <div style="font-size: 0.8rem; color: #cbd5e1; line-height: 1.45; margin-bottom: 0.85rem;">
+                Para sincronizar o WhatsApp ao vivo e usar o robô de disparos automáticos:<br>
+                1. Dê 2 cliques no arquivo <strong>iniciar_robo.bat</strong> na pasta do projeto.<br>
+                2. Ou acesse pelo endereço local: <br>
+                <a href="http://127.0.0.1:5000" target="_blank" style="color: #38bdf8; font-weight: 800; text-decoration: underline;">http://127.0.0.1:5000</a>
+              </div>
+              <button class="nav-btn primary" onclick="triggerConnectWhatsApp()" style="width: 100%; justify-content: center; padding: 0.55rem; font-size: 0.8rem;">
+                <span>🔄 Tentar Novamente</span>
+              </button>
+            </div>
+          `;
+        }
+      };
+
       try {
-        await fetch(`${API_BASE}/api/connect_whatsapp`, { method: 'POST' });
+        await fetch(`${API_BASE}/api/connect_whatsapp`, { method: 'POST' }).catch(() => {});
         
         if (qrPollingInterval) clearInterval(qrPollingInterval);
         
         qrPollingInterval = setInterval(async () => {
+          qrAttemptCount++;
           try {
             const res = await fetch(`${API_BASE}/api/status`);
-            if (!res.ok) return;
+            if (!res.ok) {
+              if (qrAttemptCount > 4) {
+                clearInterval(qrPollingInterval);
+                notifyServerError();
+              }
+              return;
+            }
             const data = await res.json();
 
             if (data.is_connected) {
@@ -1848,8 +1894,17 @@ html_template = """<!DOCTYPE html>
                 qrImg.src = data.qr_image;
                 qrImg.style.display = 'block';
               }
+            } else if (qrAttemptCount > 15) {
+              if (spinner) {
+                spinner.innerHTML = '<span style="color: #fbbf24; font-weight: 700;">Aguardando WhatsApp Web carregar o QR Code...</span>';
+              }
             }
-          } catch (e) {}
+          } catch (e) {
+            if (qrAttemptCount > 4) {
+              clearInterval(qrPollingInterval);
+              notifyServerError();
+            }
+          }
         }, 1000);
 
       } catch (err) {
